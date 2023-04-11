@@ -2,6 +2,9 @@ package com.example.rickandmortytest.presentation.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.cachedIn
+import com.example.rickandmortytest.data.model.CharacterEntity
 import com.example.rickandmortytest.domain.utils.Resource
 import com.example.rickandmortytest.presentation.utils.UIState
 import kotlinx.coroutines.Dispatchers
@@ -12,9 +15,10 @@ import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel() {
 
-   protected fun <T> Flow<Resource<T>>.collectFlow(
+   protected fun <T> Flow<Resource<Pager<Int, CharacterEntity>>>.collectFlow(
         _state: MutableStateFlow<UIState<T>>
     ) {
+
         viewModelScope.launch(Dispatchers.IO) {
             this@collectFlow.collect { res ->
                 when (res) {
@@ -28,7 +32,10 @@ abstract class BaseViewModel : ViewModel() {
                     }
                     is Resource.Success -> {
                         if (res.data != null) {
-                            _state.value = UIState.Success(res.data)
+                            val listData = res.data.flow.cachedIn(viewModelScope)
+                            listData.collect{
+                                _state.value = UIState.Success(it)
+                            }
                         }
                     }
                 }

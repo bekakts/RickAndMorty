@@ -1,23 +1,27 @@
 package com.example.rickandmortytest.data.repository
 
-import com.example.rickandmortytest.data.mappers.toCharacter
-import com.example.rickandmortytest.domain.model.Character
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import com.example.rickandmortytest.RetrofitClient
+import com.example.rickandmortytest.data.remote.Api
 import com.example.rickandmortytest.domain.repository.Repository
-import com.example.rickandmortytest.domain.utils.Resource
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 
-class RepositoryImpl:Repository {
+class RepositoryImpl : Repository {
 
-    private val dataSource = RemoteDataSource()
 
-    override fun getCharacters(): Flow<Resource<List<Character>>> = flow {
-        emit(Resource.Loading())
-        val response = dataSource.getCharacters().data?.results?.map {
-            it.toCharacter()
-        }
-        emit(Resource.Success(response))
-    }.flowOn(Dispatchers.IO)
+    private val api: Api by lazy {
+        RetrofitClient.create()
+    }
+
+    override fun getCharacters(): Flow<PagingData<com.example.rickandmortytest.domain.model.Character>> {
+        return Pager(
+            config = PagingConfig(pageSize = 2),
+            pagingSourceFactory = { RemotePagingSource(api) }
+        ).flow
+    }
+
+
+
 }

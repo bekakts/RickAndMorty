@@ -1,6 +1,7 @@
 package com.example.rickandmortytest.presentation.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.LayoutRes
@@ -8,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.PagingData
+import com.example.rickandmortytest.domain.model.Character
 import com.example.rickandmortytest.presentation.utils.UIState
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -32,24 +35,27 @@ abstract class BaseFragment(@LayoutRes layoutId: Int): Fragment(layoutId) {
         state: ((UIState<T>) -> Unit)? = null,
         onSuccess: (data: T) -> Unit
     ){
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                this@collectUIState.collect{
-                    state?.invoke(it)
-                    when(it){
-                        is UIState.Empty -> {}
-                        is UIState.Error -> {
-                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                        }
-                        is UIState.Loading -> {}
-                        is UIState.Success -> {
-                            onSuccess(it.data)
-                        }
-                    }
+       viewLifecycleOwner.lifecycleScope.launch {
+           repeatOnLifecycle(Lifecycle.State.STARTED){
+               this@collectUIState.collect{
+                   state?.invoke(it)
+                   when(it){
+                       is UIState.Empty ->{}
+                       is UIState.Error ->{
+                           Log.e("ololo",it.message)
+                           Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                       }
+                       is UIState.Loading ->{
+                           Log.e("ololo","it's loading: $it")
+                       }
+                       is UIState.Success -> {
+                           onSuccess(it.data as T)
+                       }
+                   }
 
-                }
-            }
-        }
+               }
+           }
+       }
     }
 
 }
