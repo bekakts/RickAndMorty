@@ -1,7 +1,5 @@
-package com.example.rickandmortytest
+package com.example.rickandmortytest.data.remote
 
-import android.util.Log
-import com.example.rickandmortytest.data.remote.Api
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -18,9 +16,9 @@ class RetrofitClient {
                 .readTimeout(5, TimeUnit.SECONDS)
                 .connectTimeout(5, TimeUnit.SECONDS)
                 .build()
-            val retrofit = Retrofit.Builder().baseUrl("https://rickandmortyapi.com/api/")
-                .addConverterFactory(GsonConverterFactory.create()).client(okHttpClient).build().create(Api::class.java)
-            return retrofit
+            return Retrofit.Builder().baseUrl("https://rickandmortyapi.com/api/")
+                .addConverterFactory(GsonConverterFactory.create()).client(okHttpClient).build()
+                .create(Api::class.java)
         }
     }
 }

@@ -9,6 +9,6 @@ class GetCharacters {
         RepositoryImpl()
     }
 
-    operator fun invoke() = repository.getCharacters()
+  operator fun invoke(name:String?=null) = repository.getCharacters(name)
 
 }

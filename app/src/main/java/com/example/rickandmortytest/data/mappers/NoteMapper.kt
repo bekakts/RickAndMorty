@@ -12,13 +12,3 @@ fun CharacterEntity.toCharacter(): Character{
         name,
     )
 }
-
-fun Character.toCharacterEntity(): CharacterEntity {
-    return CharacterEntity(
-        id,
-        image,
-        status,
-        name
-    )
-
-}
