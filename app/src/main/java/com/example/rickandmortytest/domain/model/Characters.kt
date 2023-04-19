@@ -2,14 +2,21 @@ package com.example.rickandmortytest.domain.model
 
 import java.io.Serializable
 
-data class Characters (
+data class Characters(
     val results: List<Character>
-):Serializable
-
+) : Serializable
 
 data class Character(
-    val id:Int?  = null,
-    val image:String?=null,
-    val status:String?=null,
-    val name:String?=null
-):Serializable
+    val id: Int? = null,
+    val image: String? = null,
+    val status: String? = null,
+    val name: String? = null,
+    val episode:List<String>? = null,
+    val location :LocationCharacter
+) : Serializable
+
+
+data class LocationCharacter(
+    val name:String? = null,
+    val url:String? =null
+)

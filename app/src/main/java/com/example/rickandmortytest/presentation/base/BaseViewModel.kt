@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.example.rickandmortytest.domain.utils.Resource
 import com.example.rickandmortytest.presentation.utils.UIState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -27,5 +28,30 @@ abstract class BaseViewModel : ViewModel() {
             }
         }
     }
+
+    protected fun <T:Any> Flow<Resource<T>>.collectDetailFlow(
+        _state: MutableStateFlow<UIState<T>>
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            this@collectDetailFlow.collect { res ->
+                when (res) {
+                    is Resource.Error -> {
+                        if (res.message != null) {
+                            _state.value = UIState.Error(res.message)
+                        }
+                    }
+                    is Resource.Loading -> {
+                        _state.value = UIState.Loading()
+                    }
+                    is Resource.Success -> {
+                        if (res.data != null) {
+                            _state.value = UIState.Success(res.data)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
 }

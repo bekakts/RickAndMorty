@@ -1,4 +1,4 @@
-package com.example.rickandmortytest.domain.usecases
+package com.example.rickandmortytest.domain.usecases.character
 
 import com.example.rickandmortytest.data.repository.RepositoryImpl
 import com.example.rickandmortytest.domain.repository.Repository

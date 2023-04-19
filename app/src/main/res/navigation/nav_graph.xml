@@ -3,11 +3,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/charactersFragment">
+    app:startDestination="@id/mainFragment">
 
     <fragment
         android:id="@+id/charactersFragment"
         android:name="com.example.rickandmortytest.presentation.ui.characters.CharactersFragment"
         android:label="fragment_characters"
         tools:layout="@layout/fragment_characters" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.rickandmortytest.presentation.ui.main.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" />
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="com.example.rickandmortytest.presentation.ui.location.LocationFragment"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location" />
+    <fragment
+        android:id="@+id/episodeFragment"
+        android:name="com.example.rickandmortytest.presentation.ui.episode.EpisodeFragment"
+        android:label="fragment_episode"
+        tools:layout="@layout/fragment_episode" />
+    <fragment
+        android:id="@+id/characterDetailFragment"
+        android:name="com.example.rickandmortytest.presentation.ui.characterdetail.CharacterDetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_character_detail" />
 </navigation>

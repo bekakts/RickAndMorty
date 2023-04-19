@@ -1,7 +1,7 @@
 package com.example.rickandmortytest.presentation.ui.characters
 
 import androidx.paging.PagingData
-import com.example.rickandmortytest.domain.usecases.GetCharacters
+import com.example.rickandmortytest.domain.usecases.character.GetCharacters
 import com.example.rickandmortytest.presentation.base.BaseViewModel
 import com.example.rickandmortytest.presentation.utils.UIState
 import kotlinx.coroutines.flow.MutableStateFlow
