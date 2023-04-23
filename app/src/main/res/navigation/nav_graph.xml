@@ -30,4 +30,14 @@
         android:name="com.example.rickandmortytest.presentation.ui.characterdetail.CharacterDetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_character_detail" />
+    <fragment
+        android:id="@+id/locationDetailFragment"
+        android:name="com.example.rickandmortytest.presentation.ui.locationdetail.LocationDetailFragment"
+        android:label="fragment_location_detail"
+        tools:layout="@layout/fragment_location_detail" />
+    <fragment
+        android:id="@+id/episodeDetailFragment"
+        android:name="com.example.rickandmortytest.presentation.ui.episodedetail.EpisodeDetailFragment"
+        android:label="fragment_episode_detail"
+        tools:layout="@layout/fragment_episode_detail" />
 </navigation>

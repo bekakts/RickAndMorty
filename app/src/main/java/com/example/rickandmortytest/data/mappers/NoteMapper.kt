@@ -1,13 +1,7 @@
 package com.example.rickandmortytest.data.mappers
 
-import com.example.rickandmortytest.data.model.CharacterEntity
-import com.example.rickandmortytest.data.model.EpisodeEntity
-import com.example.rickandmortytest.data.model.LocationCharacterEntity
-import com.example.rickandmortytest.data.model.LocationEntity
-import com.example.rickandmortytest.domain.model.Character
-import com.example.rickandmortytest.domain.model.Episode
-import com.example.rickandmortytest.domain.model.Location
-import com.example.rickandmortytest.domain.model.LocationCharacter
+import com.example.rickandmortytest.data.model.*
+import com.example.rickandmortytest.domain.model.*
 
 
 fun CharacterEntity.toCharacter(): Character{
@@ -17,7 +11,17 @@ fun CharacterEntity.toCharacter(): Character{
         status,
         name,
         episode,
-        location.toLocationCharacter()
+        species,
+        location.toLocationCharacter(),
+        origin.toOrigin(),
+        gender
+    )
+}
+
+fun OriginEntity.toOrigin():Origin{
+    return Origin(
+        name,
+        url
     )
 }
 

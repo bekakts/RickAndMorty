@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    
+    <style name="tv_characteristic" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="tv_black_characteristic" parent="tv_characteristic">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_marginStart">20dp</item>
+    </style>
+
+    <style name="tv_green_characteristic" parent="tv_characteristic">
+        <item name="android:textColor">@color/green</item>
+        <item name="android:layout_marginEnd">14dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+    <style name="round_button" parent="Widget.Material3.Button">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+</resources>

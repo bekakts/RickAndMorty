@@ -1,36 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.ui.characterdetail.CharacterDetailFragment">
+    tools:context=".presentation.ui.characterdetail.CharacterDetailFragment"
+    tools:ignore="ScrollViewCount">
 
-    <ProgressBar
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:id="@+id/progressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:scaleType="centerCrop"
-            tools:srcCompat="@tools:sample/avatars" />
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:elevation="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_description"
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/characteristicsLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-    </LinearLayout>
+            app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/characterCard"
+                android:layout_width="match_parent"
+                android:layout_height="450dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:elevation="4dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imgCharacter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvName"
+                style="@style/tv_black_characteristic"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/characterCard" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvSpecies"
+                style="@style/tv_black_characteristic"
+                android:text="Species"
+                app:layout_constraintEnd_toStartOf="@id/tvGreenSpecies"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvGreenSpecies" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvGender"
+                style="@style/tv_black_characteristic"
+                android:text="Gender"
+                app:layout_constraintEnd_toStartOf="@id/tvGreenGender"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvGreenGender" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvOrigin"
+
+                style="@style/tv_black_characteristic"
+                android:text="Origin"
+                app:layout_constraintEnd_toStartOf="@id/tvGreenOrigin"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvGreenOrigin" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvLocation"
+                style="@style/tv_black_characteristic"
+                android:text="Location"
+                app:layout_constraintEnd_toStartOf="@id/tvGreenLocation"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tvGreenLocation" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvGreenSpecies"
+                style="@style/tv_green_characteristic"
+                android:layout_marginStart="14dp"
+                android:text="Species"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvSpecies"
+                app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvGreenGender"
+                style="@style/tv_green_characteristic"
+                android:layout_marginStart="14dp"
+                android:text="Gender"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvGender"
+                app:layout_constraintTop_toBottomOf="@id/tvGreenSpecies" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvGreenOrigin"
+                style="@style/tv_green_characteristic"
+                android:layout_marginStart="14dp"
+                android:text="Origin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvOrigin"
+                app:layout_constraintTop_toBottomOf="@id/tvGreenGender" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvGreenLocation"
+                style="@style/tv_green_characteristic"
+                android:layout_marginStart="14dp"
+                android:text="Location"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tvLocation"
+                app:layout_constraintTop_toBottomOf="@id/tvGreenOrigin" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="80dp"
+            android:background="@color/light_gray"
+            app:layout_constraintTop_toBottomOf="@id/characteristicsLayout" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/episodeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/divider">
+
+            <com.google.android.material.textview.MaterialTextView
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/tv_episode"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="Episode"
+                style="@style/tv_black_characteristic" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:id="@+id/recyclerEpisode"
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_episode"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:listitem="@layout/item_character_episode"
+                android:layout_height="wrap_content"/>
+
+            <ProgressBar
+                android:id="@+id/progress_episode"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_episode"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

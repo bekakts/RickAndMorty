@@ -76,6 +76,6 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
     }
 
     private fun onClick(id:Int){
-        findNavController().navigate(R.id.detailFragment, bundleOf("key" to id))
+        findNavController().navigate(R.id.characterDetailFragment, bundleOf("key" to id))
     }
 }
