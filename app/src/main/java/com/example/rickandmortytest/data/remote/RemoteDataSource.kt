@@ -3,18 +3,18 @@ package com.example.rickandmortytest.data.remote
 import com.example.rickandmortytest.data.base.BaseDataSource
 import com.example.rickandmortytest.data.model.CharacterEntity
 import com.example.rickandmortytest.data.model.EpisodeEntity
-import com.example.rickandmortytest.data.model.EpisodesEntity
 import com.example.rickandmortytest.data.model.LocationEntity
 import com.example.rickandmortytest.domain.utils.Resource
+import org.koin.core.module.Module
+import org.koin.dsl.module
 
-class RemoteDataSource() : BaseDataSource() {
+val remoteDataSource: Module = module {
+    factory { RemoteDataSource(get()) }
+}
 
-    private val api: Api by lazy {
-        RetrofitClient.create()
-    }
+class RemoteDataSource(private val api: Api) : BaseDataSource() {
 
     suspend fun getCharacter(id: Int): Resource<CharacterEntity> {
-
         return getResult { api.getCharacterByID(id) }
     }
 

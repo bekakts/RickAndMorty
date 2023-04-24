@@ -1,7 +1,6 @@
 package com.example.rickandmortytest.presentation.ui.location
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -35,7 +34,6 @@ class LocationsAdapter :
         fun bind(data: Location) {
             with(binding) {
                 tvName.text = "${data.name}  "
-                Log.e("ololo","LocationAdapter: ${data.id}")
                 tvDimension.text = "Dimension: ${data.dimension}"
                 tvType.text = "Type: ${data.type}"
             }

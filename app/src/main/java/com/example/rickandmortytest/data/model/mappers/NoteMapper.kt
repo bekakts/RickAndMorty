@@ -1,4 +1,4 @@
-package com.example.rickandmortytest.data.mappers
+package com.example.rickandmortytest.data.model.mappers
 
 import com.example.rickandmortytest.data.model.*
 import com.example.rickandmortytest.domain.model.*

@@ -8,11 +8,7 @@ import com.example.rickandmortytest.presentation.utils.UIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class EpisodesViewModel:BaseViewModel() {
-
-    private val getEpisodesUseCase: GetEpisodes by lazy {
-        GetEpisodes()
-    }
+class EpisodesViewModel(private val getEpisodesUseCase: GetEpisodes):BaseViewModel() {
 
     private val _getEpisodesState = MutableStateFlow<UIState<PagingData<Episode>>>(UIState.Empty())
     val getEpisodesState = _getEpisodesState.asStateFlow()

@@ -8,11 +8,7 @@ import com.example.rickandmortytest.presentation.utils.UIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class LocationsViewModel : BaseViewModel(){
-
-    private val getLocationUseCase: GetLocations by lazy {
-        GetLocations()
-    }
+class LocationsViewModel(private val getLocationUseCase: GetLocations) : BaseViewModel(){
 
     private val _getLocationState = MutableStateFlow<UIState<PagingData<Location>>>(UIState.Empty())
     val getLocationState = _getLocationState.asStateFlow()

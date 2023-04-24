@@ -1,10 +1,6 @@
 package com.example.rickandmortytest.domain.model
 import java.io.Serializable
 
-data class Locations(
-    val results: List<Location>
-):Serializable
-
 data class Location(
     val id:Int,
     val name:String?= null,

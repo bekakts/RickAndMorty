@@ -10,18 +10,11 @@ import com.example.rickandmortytest.presentation.utils.UIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class CharacterDetailViewModel : BaseViewModel() {
-
-    private val getCharacterUseCase: GetCharacter by lazy {
-        GetCharacter()
-    }
-    private val getLocationUseCase: GetLocation by lazy {
-        GetLocation()
-    }
-    private val getEpisodeUseCase: GetEpisode by lazy {
-        GetEpisode()
-    }
-
+class CharacterDetailViewModel(
+    private val getCharacterUseCase: GetCharacter,
+    private val getLocationUseCase: GetLocation,
+    private val getEpisodeUseCase: GetEpisode
+) : BaseViewModel() {
 
     private val _getCharacterState =
         MutableStateFlow<UIState<com.example.rickandmortytest.domain.model.Character>>(UIState.Empty())

@@ -1,10 +1,8 @@
 package com.example.rickandmortytest.presentation.ui.characters
 
-import android.util.Log
 import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -12,11 +10,12 @@ import com.example.rickandmortytest.R
 import com.example.rickandmortytest.databinding.FragmentCharactersBinding
 import com.example.rickandmortytest.presentation.base.BaseFragment
 import com.example.rickandmortytest.presentation.utils.UIState
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
 
     private val binding by viewBinding(FragmentCharactersBinding::bind)
-    private val viewModel: CharactersViewModel by viewModels()
+    private val viewModel: CharactersViewModel by viewModel()
     private val characterAdapter = CharacterAdapter(this::onClick)
     private var name: String? = null
 
@@ -27,14 +26,13 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
 
     override fun setupSubscribers() {
         super.setupSubscribers()
-
         viewModel.getCharacterState.collectUIState(
             state = {
                 binding.bottomProgress.isVisible = it is UIState.Loading
             },
             onSuccess = {
+                binding.progressBar.progress.isVisible = false
                 characterAdapter.submitData(lifecycle, it)
-                Log.e("ololo","CharactersFragment: $it")
                 binding.recyclerView.scrollToPosition(0)
             }
         )
@@ -42,10 +40,8 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
 
     override fun initialize() {
         super.initialize()
-        with(binding) {
-            setupRecyclerView()
-            searchLogic()
-        }
+        setupRecyclerView()
+        searchLogic()
     }
 
     private fun searchLogic() {

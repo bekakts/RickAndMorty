@@ -2,20 +2,19 @@ package com.example.rickandmortytest.presentation.ui.episode
 
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmortytest.R
 import com.example.rickandmortytest.databinding.FragmentEpisodeBinding
 import com.example.rickandmortytest.presentation.base.BaseFragment
 import com.example.rickandmortytest.presentation.utils.UIState
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class EpisodeFragment : BaseFragment(R.layout.fragment_episode) {
 
     private val binding by viewBinding(FragmentEpisodeBinding::bind)
-    private val viewModel: EpisodesViewModel by viewModels()
+    private val viewModel: EpisodesViewModel by viewModel()
     private val episodesAdapter = EpisodesAdapter()
     private var name: String? = null
 
@@ -33,6 +32,7 @@ class EpisodeFragment : BaseFragment(R.layout.fragment_episode) {
                 binding.bottomProgress.isVisible = it is UIState.Loading
             },
             onSuccess = {
+                binding.progressBar.progress.isVisible = false
                 episodesAdapter.submitData(lifecycle, it)
                 binding.recyclerView.scrollToPosition(0)
             }
@@ -41,10 +41,8 @@ class EpisodeFragment : BaseFragment(R.layout.fragment_episode) {
 
     override fun initialize() {
         super.initialize()
-        with(binding) {
-            setupRecyclerView()
-            searchLogic()
-        }
+        setupRecyclerView()
+        searchLogic()
     }
 
     private fun searchLogic() {

@@ -1,6 +1,5 @@
 package com.example.rickandmortytest.presentation.ui.characters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -35,7 +34,6 @@ class CharacterAdapter(val onClick:(id:Int)->Unit) :
                 itemView.setOnClickListener {
                     data?.id?.let {  onClick(it) }
                 }
-                Log.e("ololo","CharacterAdapter: ${data!!.id.toString()}")
                 tvDescription.text = data?.name ?: "This character absent"
                 Glide.with(imageView).load(data?.image).into(imageView)
 

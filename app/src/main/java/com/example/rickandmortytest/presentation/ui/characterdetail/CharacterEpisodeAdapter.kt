@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortytest.databinding.ItemCharacterEpisodeBinding
 import com.example.rickandmortytest.domain.model.Episode
 
-class CharacterEpisodeAdapter() :
+class CharacterEpisodeAdapter :
     ListAdapter<Episode, CharacterEpisodeAdapter.CharacterEpisodeViewHolder>(NoteDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterEpisodeViewHolder {

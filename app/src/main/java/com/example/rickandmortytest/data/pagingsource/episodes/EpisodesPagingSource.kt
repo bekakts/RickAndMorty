@@ -27,7 +27,6 @@ class EpisodesPagingSource<T>(
 
             if (response.isSuccessful) {
                 val data = response.body()?.let { mapper(it) } ?: emptyList()
-                Log.e("ololo", "EpisodesPagingSource: $data")
                 LoadResult.Page(
                     data = data,
                     prevKey = if (currentPage == 1) null else currentPage - 1,
