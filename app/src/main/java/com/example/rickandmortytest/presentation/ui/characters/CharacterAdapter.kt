@@ -1,5 +1,6 @@
 package com.example.rickandmortytest.presentation.ui.characters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -31,6 +32,7 @@ class CharacterAdapter(val onClick:(id:Int)->Unit) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Character?) {
             with(binding) {
+                Log.e("ololo","CharacterAdapter:${data?.id}")
                 itemView.setOnClickListener {
                     data?.id?.let {  onClick(it) }
                 }

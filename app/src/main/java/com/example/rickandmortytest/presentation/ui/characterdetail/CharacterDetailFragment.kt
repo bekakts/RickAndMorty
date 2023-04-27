@@ -30,8 +30,9 @@ class CharacterDetailFragment : BaseFragment(R.layout.fragment_character_detail)
         super.initialize()
         setUpRecyclerView()
     }
-    private fun setUpRecyclerView(){
-        with(binding){
+
+    private fun setUpRecyclerView() {
+        with(binding) {
             recyclerEpisode.layoutManager = LinearLayoutManager(requireContext())
             recyclerEpisode.adapter = episodeAdapter
         }
@@ -42,18 +43,21 @@ class CharacterDetailFragment : BaseFragment(R.layout.fragment_character_detail)
         viewModel.getCharacterState.collectUIState(
             state = { binding.progressBar.isVisible = it is UIState.Loading },
             onSuccess = {
-                it.location.url?.substringAfterLast("/")
-                    ?.let { it1 -> viewModel.getLocation(it1.toInt()) }
-                it.episode?.map { id ->
-                    idEpisode.add(id.substringAfterLast("/").toInt())
+                if (it.location.url?.isNotEmpty() == true){
+                    viewModel.getLocation(it.location.url.substringAfterLast("/").toInt())
+                }
+                if (it.episode?.isNotEmpty() == true){
+                    it.episode.map { id ->
+                        idEpisode.add(id.substringAfterLast("/").toInt())
+                    }
                 }
                 with(binding) {
                     viewModel.getEpisode(idEpisode)
-
                     Glide.with(imgCharacter).load(it.image).into(imgCharacter)
                     tvName.text = it.name
                     tvGreenSpecies.text = it.species
                     tvGreenGender.text = it.gender
+
                     tvGreenOrigin.text = it.origin.name
                     tvGreenLocation.text = it.location.name
                 }
@@ -68,7 +72,7 @@ class CharacterDetailFragment : BaseFragment(R.layout.fragment_character_detail)
 
         viewModel.getEpisodeState.collectUIState(
             state = {
-                    binding.progressEpisode.isVisible = it is UIState.Loading
+                binding.progressEpisode.isVisible = it is UIState.Loading
             },
             onSuccess = {
                 episodeAdapter.submitList(it)

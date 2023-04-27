@@ -1,5 +1,6 @@
 package com.example.rickandmortytest.data.repository
 
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -22,9 +23,9 @@ import kotlinx.coroutines.flow.flowOn
 
 class RepositoryImpl(private val dataSource: RemoteDataSource, private val api: Api) : Repository {
 
-    override fun getCharacters(names: String?): Flow<PagingData<com.example.rickandmortytest.domain.model.Character>> {
-        val remotePagingSource = CharactersPagingSource(names,
-            requestFunction = { page, name -> api.getCharacters(page, name) },
+    override fun getCharacters(name: String?, status:String?, species:String?, gender: String?): Flow<PagingData<com.example.rickandmortytest.domain.model.Character>> {
+        val remotePagingSource = CharactersPagingSource(name,status,species,gender,
+            requestFunction = { page,names,statuses,specieses,genders-> api.getCharacters(page,names,statuses,specieses,genders) },
             mapper = { response -> response.results.map { it.toCharacter() } }
         )
         return Pager(

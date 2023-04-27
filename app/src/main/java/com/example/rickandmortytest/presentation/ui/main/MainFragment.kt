@@ -24,7 +24,6 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
         EpisodeFragment()
     )
 
-
     override fun initialize() {
         super.initialize()
         initAdapter()
@@ -40,7 +39,6 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
             lifecycle
         )
         binding.mainPager.adapter = adapter
-
     }
 
 }

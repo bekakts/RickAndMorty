@@ -9,12 +9,18 @@ import kotlinx.coroutines.flow.Flow
 
 interface Repository {
 
-    fun getCharacters(names:String? = null): Flow<PagingData<Character>>
-    fun getLocations(names:String? = null): Flow<PagingData<Location>>
-    fun getEpisodes(names:String? = null): Flow<PagingData<Episode>>
+    fun getCharacters(
+        name: String? = null,
+        status: String? = null,
+        species: String? = null,
+        gender: String? = null
+    ): Flow<PagingData<Character>>
 
-    fun getCharacter(id:Int): Flow<Resource<Character>>
-    fun getLocation(id:Int): Flow<Resource<Location>>
-    fun getEpisode(id:List<Int>): Flow<Resource<List<Episode>>>
+    fun getLocations(names: String? = null): Flow<PagingData<Location>>
+    fun getEpisodes(names: String? = null): Flow<PagingData<Episode>>
+
+    fun getCharacter(id: Int): Flow<Resource<Character>>
+    fun getLocation(id: Int): Flow<Resource<Location>>
+    fun getEpisode(id: List<Int>): Flow<Resource<List<Episode>>>
 
 }
