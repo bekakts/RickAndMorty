@@ -1,6 +1,8 @@
 package com.example.rickandmortytest.presentation.ui.characterdetail
 
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.bumptech.glide.Glide
@@ -16,9 +18,10 @@ class CharacterDetailFragment : BaseFragment(R.layout.fragment_character_detail)
         FragmentCharacterDetailBinding::bind
     )
     private val viewModel: CharacterDetailViewModel by viewModel()
-    private var id = 1
+    private var id = arrayListOf<Int>()
     private var idEpisode = arrayListOf<Int>()
-    private val episodeAdapter = CharacterEpisodeAdapter()
+    private var idLocation: Int? = null
+    private val episodeAdapter = CharacterEpisodeAdapter(this::onClick)
 
     override fun setupRequests() {
         super.setupRequests()
@@ -31,6 +34,20 @@ class CharacterDetailFragment : BaseFragment(R.layout.fragment_character_detail)
         setUpRecyclerView()
     }
 
+    override fun initClickListeners() {
+        super.initClickListeners()
+        with(binding) {
+            tvGreenLocation.setOnClickListener {
+                if (idLocation != null) {
+                    findNavController().navigate(
+                        R.id.locationDetailFragment,
+                        bundleOf("keyLocation" to idLocation)
+                    )
+                }
+            }
+        }
+    }
+
     private fun setUpRecyclerView() {
         with(binding) {
             recyclerEpisode.layoutManager = LinearLayoutManager(requireContext())
@@ -41,25 +58,30 @@ class CharacterDetailFragment : BaseFragment(R.layout.fragment_character_detail)
     override fun setupSubscribers() {
         super.setupSubscribers()
         viewModel.getCharacterState.collectUIState(
-            state = { binding.progressBar.isVisible = it is UIState.Loading },
+            state = {
+                binding.progress.progress.isVisible = it is UIState.Loading
+                binding.detailCharacterContainer.isVisible = it !is UIState.Loading
+            },
             onSuccess = {
-                if (it.location.url?.isNotEmpty() == true){
-                    viewModel.getLocation(it.location.url.substringAfterLast("/").toInt())
+                if (it[0].location.url?.isNotEmpty() == true) {
+                    it[0].location.url?.substringAfterLast("/")
+                        ?.let { it1 -> viewModel.getLocation(it1.toInt()) }
+                    it[0].location.url?.substringAfterLast("/")
+                        ?.let { it1 -> idLocation = it1.toInt() }
                 }
-                if (it.episode?.isNotEmpty() == true){
-                    it.episode.map { id ->
+                if (it[0].episode?.isNotEmpty() == true) {
+                    it[0].episode?.map { id ->
                         idEpisode.add(id.substringAfterLast("/").toInt())
                     }
                 }
                 with(binding) {
                     viewModel.getEpisode(idEpisode)
-                    Glide.with(imgCharacter).load(it.image).into(imgCharacter)
-                    tvName.text = it.name
-                    tvGreenSpecies.text = it.species
-                    tvGreenGender.text = it.gender
-
-                    tvGreenOrigin.text = it.origin.name
-                    tvGreenLocation.text = it.location.name
+                    Glide.with(imgCharacter).load(it[0].image).into(imgCharacter)
+                    tvName.text = it[0].name
+                    tvGreenSpecies.text = it[0].species
+                    tvGreenGender.text = it[0].gender
+                    tvGreenOrigin.text = it[0].origin.name
+                    tvGreenLocation.text = it[0].location.name
                 }
             }
         )
@@ -72,7 +94,7 @@ class CharacterDetailFragment : BaseFragment(R.layout.fragment_character_detail)
 
         viewModel.getEpisodeState.collectUIState(
             state = {
-                binding.progressEpisode.isVisible = it is UIState.Loading
+                //binding.progressEpisode.isVisible = it is UIState.Loading
             },
             onSuccess = {
                 episodeAdapter.submitList(it)
@@ -80,9 +102,14 @@ class CharacterDetailFragment : BaseFragment(R.layout.fragment_character_detail)
         )
     }
 
+    private fun onClick(id: Int) {
+        findNavController().navigate(R.id.episodeDetailFragment, bundleOf("keyEpisode" to id))
+    }
+
     private fun receiveId() {
         arguments?.let {
-            id = it.getInt("key")
+            id.clear()
+            id.add(it.getInt("key"))
         }
     }
 }

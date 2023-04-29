@@ -21,7 +21,7 @@ class CharactersViewModel(private val getCharacterUseCase: GetCharacters) : Base
         getCharacterUseCase(name, status, species, gender).collectFlow(_getCharacterState)
     }
 
-    fun invalidate() {
+    private fun invalidate() {
         _getCharacterState.value = UIState.Empty()
     }
 

@@ -14,7 +14,7 @@ val remoteDataSource: Module = module {
 
 class RemoteDataSource(private val api: Api) : BaseDataSource() {
 
-    suspend fun getCharacter(id: Int): Resource<CharacterEntity> {
+    suspend fun getCharacter(id: List<Int>): Resource<List<CharacterEntity>> {
         return getResult { api.getCharacterByID(id) }
     }
 

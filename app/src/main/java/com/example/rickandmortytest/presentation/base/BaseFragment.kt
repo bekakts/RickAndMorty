@@ -1,6 +1,7 @@
 package com.example.rickandmortytest.presentation.base
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
@@ -37,13 +38,14 @@ abstract class BaseFragment(@LayoutRes layoutId: Int): Fragment(layoutId) {
                    state?.invoke(it)
                    when(it){
                        is UIState.Empty ->{}
-                       is UIState.Error ->{}
+                       is UIState.Error ->{
+                           Log.e("olololo","BF:${it.message}")
+                       }
                        is UIState.Loading ->{}
                        is UIState.Success -> {
                            onSuccess(it.data)
                        }
                    }
-
                }
            }
        }

@@ -7,5 +7,5 @@ data class Episode(
     val name: String? = null,
     val air_date: String? = null,
     val episode:String?= null,
-    val characters:List<String>
+    val characters:List<String>? = null
 ):Serializable

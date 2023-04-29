@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortytest.databinding.ItemEpisodeBinding
 import com.example.rickandmortytest.domain.model.Episode
 
-class EpisodesAdapter :
+class EpisodesAdapter(val onClick:(id:Int) ->Unit) :
     PagingDataAdapter<Episode, EpisodesAdapter.EpisodesViewHolder>(NoteDiffUtil()) {
 
 
@@ -30,6 +30,9 @@ class EpisodesAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Episode) {
             with(binding) {
+                itemView.setOnClickListener {
+                    onClick(data.id)
+                }
                 tvEpisode.text = data.episode
                 tvName.text = data.name
                 tvAirDate.text = data.air_date

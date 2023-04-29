@@ -20,10 +20,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import com.example.rickandmortytest.domain.model.Character
 
 class RepositoryImpl(private val dataSource: RemoteDataSource, private val api: Api) : Repository {
 
-    override fun getCharacters(name: String?, status:String?, species:String?, gender: String?): Flow<PagingData<com.example.rickandmortytest.domain.model.Character>> {
+    override fun getCharacters(name: String?, status:String?, species:String?, gender: String?): Flow<PagingData<Character>> {
         val remotePagingSource = CharactersPagingSource(name,status,species,gender,
             requestFunction = { page,names,statuses,specieses,genders-> api.getCharacters(page,names,statuses,specieses,genders) },
             mapper = { response -> response.results.map { it.toCharacter() } }
@@ -56,10 +57,10 @@ class RepositoryImpl(private val dataSource: RemoteDataSource, private val api: 
         ).flow.flowOn(Dispatchers.IO)
     }
 
-    override fun getCharacter(id: Int): Flow<Resource<com.example.rickandmortytest.domain.model.Character>> =
+    override fun getCharacter(id: List<Int>): Flow<Resource<List<Character>>> =
         flow {
             emit(Resource.Loading())
-            val response = dataSource.getCharacter(id).data?.toCharacter()
+            val response = dataSource.getCharacter(id).data?.map {  it.toCharacter()}
             emit(Resource.Success(response))
         }.flowOn(Dispatchers.IO)
 

@@ -23,28 +23,43 @@
         app:queryBackground="@null"
         app:queryHint="hello" />
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/search_characters">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/shimmer_location" />
+
+            <include layout="@layout/shimmer_location" />
+
+            <include layout="@layout/shimmer_location" />
+
+            <include layout="@layout/shimmer_location" />
+
+            <include layout="@layout/shimmer_location" />
+
+            <include layout="@layout/shimmer_location" />
+
+        </LinearLayout>
+
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="12dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomProgress"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_characters"
         tools:listitem="@layout/item_locations" />
-
-    <ProgressBar
-        android:id="@+id/bottomProgress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="2dp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/recyclerView" />
-
-    <include
-        android:id="@+id/progressBar"
-        layout="@layout/item_progress_bar"/>
-
+    
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortytest.databinding.ItemLocationsBinding
 import com.example.rickandmortytest.domain.model.Location
 
-class LocationsAdapter :
+class LocationsAdapter(val onClick:(id:Int)->Unit) :
     PagingDataAdapter<Location, LocationsAdapter.LocationViewHolder>(NoteDiffUtil()) {
 
 
@@ -33,6 +33,9 @@ class LocationsAdapter :
         @SuppressLint("SetTextI18n")
         fun bind(data: Location) {
             with(binding) {
+                itemView.setOnClickListener {
+                    onClick(data.id)
+                }
                 tvName.text = "${data.name}  "
                 tvDimension.text = "Dimension: ${data.dimension}"
                 tvType.text = "Type: ${data.type}"

@@ -17,7 +17,6 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmortytest.R
 import com.example.rickandmortytest.databinding.FragmentCharactersBinding
 import com.example.rickandmortytest.presentation.base.BaseFragment
-import com.example.rickandmortytest.presentation.utils.UIState
 import com.example.rickandmortytest.presentation.utils.initDialog
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
@@ -46,10 +45,9 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
         super.setupSubscribers()
         viewModel.getCharacterState.collectUIState(
             state = {
-                binding.bottomProgress.isVisible = it is UIState.Loading
+
             },
             onSuccess = {
-                binding.progressBar.progress.isVisible = false
                 characterAdapter.submitData(lifecycle, it)
                 binding.recyclerView.scrollToPosition(0)
             }
@@ -86,6 +84,11 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
             tvFilter.setOnClickListener {
                 filterLogic()
             }
+            recyclerView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+                if ((binding.recyclerView.adapter?.itemCount ?: 0) > 0) {
+                    binding.shimmerViewContainer.isVisible = false
+                }
+            }
         }
     }
 
@@ -112,7 +115,7 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
         }
         status.setOnCheckedChangeListener { group, checkedId ->
 
-            statusId= group.findViewById(checkedId)
+            statusId = group.findViewById(checkedId)
         }
         btnSearch.setOnClickListener {
             viewModel.addFilter(
@@ -158,4 +161,5 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
     private fun onClick(id: Int) {
         findNavController().navigate(R.id.characterDetailFragment, bundleOf("key" to id))
     }
+
 }

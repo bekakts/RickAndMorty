@@ -1,49 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.ui.episode.EpisodeFragment">
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_characters"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/search_characters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_search"
+        android:elevation="2dp"
+        android:hint="Поиск"
+        app:defaultQueryHint="hello"
+        app:iconifiedByDefault="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:queryBackground="@null"
+        app:queryHint="hello" />
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:background="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/search_characters">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_search"
-            android:elevation="2dp"
-            android:hint="Поиск"
-            app:defaultQueryHint="hello"
-            app:iconifiedByDefault="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:queryBackground="@null"
-            app:queryHint="hello" />
+            android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            tools:listitem="@layout/item_episode"
-            android:layout_marginTop="12dp"
-            app:layout_constraintBottom_toTopOf="@id/bottomProgress"
-            app:layout_constraintTop_toBottomOf="@+id/search_characters" />
+            <include layout="@layout/shimmer_episode" />
 
-        <ProgressBar
-            android:id="@+id/bottomProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/recyclerView" />
+            <include layout="@layout/shimmer_episode" />
 
-    <include
-        android:id="@+id/progressBar"
-        layout="@layout/item_progress_bar"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <include layout="@layout/shimmer_episode" />
+
+            <include layout="@layout/shimmer_episode" />
+
+            <include layout="@layout/shimmer_episode" />
+
+            <include layout="@layout/shimmer_episode" />
+
+        </LinearLayout>
+
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_characters"
+        tools:listitem="@layout/item_episode" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

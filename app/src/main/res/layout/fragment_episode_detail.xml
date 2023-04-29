@@ -1,14 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.ui.episodedetail.EpisodeDetailFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_episode"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray"
+        android:elevation="2dp"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/toolbar_tv_episode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Episode"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_episode">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include
+                android:id="@+id/progress"
+                layout="@layout/item_progress_bar"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/episodeDevider"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/characteristicContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_name"
+                    style="@style/tv_black_characteristic"
+                    android:text="Name"
+                    app:layout_constraintBottom_toBottomOf="@id/tvGreenName"
+                    app:layout_constraintEnd_toStartOf="@id/tvGreenName"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvGreenName" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_air_date"
+                    style="@style/tv_black_characteristic"
+                    android:text="Air Date"
+                    app:layout_constraintBottom_toBottomOf="@id/tvGreenAirDate"
+                    app:layout_constraintEnd_toStartOf="@id/tvGreenAirDate"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvGreenAirDate" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_episode"
+                    style="@style/tv_black_characteristic"
+                    android:text="Episode"
+                    app:layout_constraintBottom_toBottomOf="@id/tvGreenEpisode"
+                    app:layout_constraintEnd_toStartOf="@id/tvGreenEpisode"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tvGreenEpisode" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvGreenName"
+                    style="@style/tv_green_characteristic"
+                    android:layout_marginStart="16dp"
+                    android:text="Pilot"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_name"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvGreenAirDate"
+                    style="@style/tv_green_characteristic"
+                    android:layout_marginStart="16dp"
+                    android:text="December 2, 2013"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_air_date"
+                    app:layout_constraintTop_toBottomOf="@id/tvGreenName" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvGreenEpisode"
+                    style="@style/tv_green_characteristic"
+                    android:layout_marginStart="16dp"
+                    android:text="S01E01"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_episode"
+                    app:layout_constraintTop_toBottomOf="@id/tvGreenAirDate" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:id="@+id/episodeDevider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:background="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/characteristicContainer" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_characters"
+                style="@style/tv_black_characteristic"
+                android:layout_marginTop="20dp"
+                android:text="Characters"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/episodeDevider" />
+
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmerEpisodeDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_characters">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/shimmer_list_caracters" />
+
+                    <include layout="@layout/shimmer_list_caracters" />
+
+                    <include layout="@layout/shimmer_list_caracters" />
+
+                    <include layout="@layout/shimmer_list_caracters" />
+
+                    <include layout="@layout/shimmer_list_caracters" />
+
+                    <include layout="@layout/shimmer_list_caracters" />
+
+                </LinearLayout>
+
+            </com.facebook.shimmer.ShimmerFrameLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerEpisode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/tv_characters"
+                tools:listitem="@layout/item_episode_character" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,7 +14,7 @@ val viewModules: Module = module {
     viewModel { CharactersViewModel(get()) }
     viewModel { CharacterDetailViewModel(get(),get(),get()) }
     viewModel { EpisodesViewModel(get()) }
-    viewModel { EpisodeDetailViewModel() }
+    viewModel { EpisodeDetailViewModel(get(),get()) }
     viewModel { LocationsViewModel(get()) }
-    viewModel { LocationDetailViewModel() }
+    viewModel { LocationDetailViewModel(get(),get()) }
 }

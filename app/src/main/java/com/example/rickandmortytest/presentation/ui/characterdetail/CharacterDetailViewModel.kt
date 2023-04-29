@@ -9,6 +9,7 @@ import com.example.rickandmortytest.presentation.base.BaseViewModel
 import com.example.rickandmortytest.presentation.utils.UIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import com.example.rickandmortytest.domain.model.Character
 
 class CharacterDetailViewModel(
     private val getCharacterUseCase: GetCharacter,
@@ -17,10 +18,10 @@ class CharacterDetailViewModel(
 ) : BaseViewModel() {
 
     private val _getCharacterState =
-        MutableStateFlow<UIState<com.example.rickandmortytest.domain.model.Character>>(UIState.Empty())
+        MutableStateFlow<UIState<List<Character>>>(UIState.Empty())
     val getCharacterState = _getCharacterState.asStateFlow()
 
-    fun getCharacter(id: Int) {
+    fun getCharacter(id: List<Int>) {
         getCharacterUseCase(id).collectDetailFlow(_getCharacterState)
     }
 

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortytest.databinding.ItemCharacterEpisodeBinding
 import com.example.rickandmortytest.domain.model.Episode
 
-class CharacterEpisodeAdapter :
+class CharacterEpisodeAdapter(val onClick:(id:Int)->Unit) :
     ListAdapter<Episode, CharacterEpisodeAdapter.CharacterEpisodeViewHolder>(NoteDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterEpisodeViewHolder {
@@ -31,6 +31,9 @@ class CharacterEpisodeAdapter :
         @SuppressLint("SetTextI18n")
         fun bind(episode: Episode, position: Int) {
             with(binding) {
+                itemView.setOnClickListener {
+                    onClick(episode.id)
+                }
                 tvName.text = episode.name
                 tvAirDate.text = episode.air_date
                 tvNum.text = (position +1).toString()

@@ -4,6 +4,6 @@ import com.example.rickandmortytest.domain.repository.Repository
 
 class GetCharacter(private val repository: Repository) {
 
-    operator fun invoke(id:Int) = repository.getCharacter(id)
+    operator fun invoke(id:List<Int>) = repository.getCharacter(id)
 
 }

@@ -19,8 +19,8 @@ interface Api {
 
    @GET("character/{id}")
    suspend fun getCharacterByID(
-       @Path("id") id: Int
-   ):Response<CharacterEntity>
+       @Path("id") id: List<Int>
+   ):Response<List<CharacterEntity>>
 
    @GET("location")
    suspend fun getLocations(
