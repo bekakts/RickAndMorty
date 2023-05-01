@@ -3,11 +3,14 @@ package com.example.rickandmortytest.presentation.base
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import com.example.rickandmortytest.presentation.utils.UIState
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -50,5 +53,6 @@ abstract class BaseFragment(@LayoutRes layoutId: Int): Fragment(layoutId) {
            }
        }
     }
+
 
 }

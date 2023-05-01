@@ -1,44 +1,37 @@
 package com.example.rickandmortytest.presentation.ui.main
 
-import by.kirich1409.viewbindingdelegate.viewBinding
-import com.example.rickandmortytest.R
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.example.rickandmortytest.databinding.FragmentMainBinding
-import com.example.rickandmortytest.presentation.base.BaseFragment
-import com.example.rickandmortytest.presentation.ui.characters.CharactersFragment
-import com.example.rickandmortytest.presentation.ui.episode.EpisodeFragment
-import com.example.rickandmortytest.presentation.ui.location.LocationFragment
 import com.google.android.material.tabs.TabLayoutMediator
 
 
-class MainFragment : BaseFragment(R.layout.fragment_main) {
+class MainFragment : Fragment() {
 
-    private val binding by viewBinding(FragmentMainBinding::bind)
-    private val tabNames = arrayListOf(
-        "Character",
-        "Location",
-        "Episode"
-    )
-    private val fragmentList = arrayListOf(
-        CharactersFragment(),
-        LocationFragment(),
-        EpisodeFragment()
-    )
+    private lateinit var binding: FragmentMainBinding
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-    override fun initialize() {
-        super.initialize()
-        initAdapter()
-        TabLayoutMediator(binding.mainTabLayout, binding.mainPager) { tab, position ->
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val pagerAdapter = ViewPagerAdapter(requireActivity())
+     binding.viewPager.adapter = pagerAdapter
+        TabLayoutMediator(
+           binding.tabLayout,binding.viewPager
+        ) { tab, position ->
+            val tabNames = listOf("Character","Location","Episode")
             tab.text = tabNames[position]
         }.attach()
     }
-
-    private fun initAdapter() {
-        val adapter = ViewPagerAdapter(
-            fragmentList,
-            requireActivity().supportFragmentManager,
-            lifecycle
-        )
-        binding.mainPager.adapter = adapter
-    }
-
 }
+
+

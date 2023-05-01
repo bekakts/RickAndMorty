@@ -1,21 +1,27 @@
 package com.example.rickandmortytest.presentation.ui.main
 
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.rickandmortytest.presentation.base.BaseFragment
+import com.example.rickandmortytest.presentation.ui.characters.CharactersFragment
+import com.example.rickandmortytest.presentation.ui.episode.EpisodeFragment
+import com.example.rickandmortytest.presentation.ui.location.LocationFragment
 
 class ViewPagerAdapter(
-    list: ArrayList<BaseFragment>,
-    fm: FragmentManager,
-    lifecycle: Lifecycle
-) : FragmentStateAdapter(fm, lifecycle) {
+    fragmentActivity: FragmentActivity
+) : FragmentStateAdapter(fragmentActivity) {
 
-    private val pagerList = list
+    override fun createFragment(position: Int): Fragment {
+        return when (position) {
+            0 -> CharactersFragment()
+            1 -> LocationFragment()
+            else -> EpisodeFragment()
+        }
+    }
 
-    override fun getItemCount() = pagerList.size
-
-    override fun createFragment(position: Int) = pagerList[position]
-
-
+    override fun getItemCount(): Int {
+        return 3
+    }
 }

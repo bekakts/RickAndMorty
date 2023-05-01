@@ -9,6 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmortytest.R
 import com.example.rickandmortytest.databinding.FragmentEpisodeBinding
 import com.example.rickandmortytest.presentation.base.BaseFragment
+import com.example.rickandmortytest.presentation.utils.LoadStatePagerAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EpisodeFragment : BaseFragment(R.layout.fragment_episode) {
@@ -78,7 +79,8 @@ class EpisodeFragment : BaseFragment(R.layout.fragment_episode) {
 
         with(binding) {
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            recyclerView.adapter = episodesAdapter
+            recyclerView.adapter = episodesAdapter.withLoadStateFooter(LoadStatePagerAdapter())
+
         }
     }
 

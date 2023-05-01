@@ -17,6 +17,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmortytest.R
 import com.example.rickandmortytest.databinding.FragmentCharactersBinding
 import com.example.rickandmortytest.presentation.base.BaseFragment
+import com.example.rickandmortytest.presentation.utils.LoadStatePagerAdapter
 import com.example.rickandmortytest.presentation.utils.initDialog
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
@@ -44,9 +45,7 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
     override fun setupSubscribers() {
         super.setupSubscribers()
         viewModel.getCharacterState.collectUIState(
-            state = {
-
-            },
+            state = null,
             onSuccess = {
                 characterAdapter.submitData(lifecycle, it)
                 binding.recyclerView.scrollToPosition(0)
@@ -153,8 +152,8 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
 
     private fun setupRecyclerView() {
         with(binding) {
+            recyclerView.adapter = characterAdapter.withLoadStateFooter(LoadStatePagerAdapter())
             recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-            recyclerView.adapter = characterAdapter
         }
     }
 

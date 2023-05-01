@@ -9,6 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmortytest.R
 import com.example.rickandmortytest.databinding.FragmentLocationBinding
 import com.example.rickandmortytest.presentation.base.BaseFragment
+import com.example.rickandmortytest.presentation.utils.LoadStatePagerAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -76,7 +77,7 @@ class LocationFragment : BaseFragment(R.layout.fragment_location) {
     private fun setUpRecyclerView() {
         with(binding) {
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            recyclerView.adapter = locationsAdapter
+            recyclerView.adapter = locationsAdapter.withLoadStateFooter(LoadStatePagerAdapter())
 
         }
     }
