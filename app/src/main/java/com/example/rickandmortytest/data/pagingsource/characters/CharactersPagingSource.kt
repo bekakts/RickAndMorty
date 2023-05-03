@@ -1,10 +1,9 @@
 package com.example.rickandmortytest.data.pagingsource.characters
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import retrofit2.Response
 import com.example.rickandmortytest.domain.model.Character
+import retrofit2.Response
 
 class CharactersPagingSource<T : Any>(
     private val name: String? = null,
