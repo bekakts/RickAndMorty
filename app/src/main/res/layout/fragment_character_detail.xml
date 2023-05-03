@@ -11,11 +11,38 @@
         android:id="@+id/progress"
         layout="@layout/item_progress_bar" />
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_character"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gray"
+        android:elevation="@dimen/dp2"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/toolbar_tv_episode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/character"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp18"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:background="@drawable/back" />
+
+    </androidx.appcompat.widget.Toolbar>
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/detailCharacterContainer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="@dimen/dp0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_character">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -30,12 +57,12 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/characterCard"
                     android:layout_width="match_parent"
-                    android:layout_height="450dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="20dp"
-                    android:elevation="4dp"
-                    app:cardCornerRadius="10dp"
+                    android:layout_height="@dimen/dp450"
+                    android:layout_marginHorizontal="@dimen/dp20"
+                    android:layout_marginTop="@dimen/dp15"
+                    android:layout_marginBottom="@dimen/dp20"
+                    android:elevation="@dimen/dp4"
+                    app:cardCornerRadius="@dimen/dp10"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
@@ -49,9 +76,9 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvName"
                     style="@style/tv_black_characteristic"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="12dp"
-                    android:textSize="30sp"
+                    android:layout_marginStart="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp12"
+                    android:textSize="@dimen/sp30"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/characterCard" />
@@ -59,7 +86,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvSpecies"
                     style="@style/tv_black_characteristic"
-                    android:text="Species"
+                    android:text="@string/species"
                     app:layout_constraintEnd_toStartOf="@id/tvGreenSpecies"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvGreenSpecies" />
@@ -67,7 +94,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvGender"
                     style="@style/tv_black_characteristic"
-                    android:text="Gender"
+                    android:text="@string/gender"
                     app:layout_constraintEnd_toStartOf="@id/tvGreenGender"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvGreenGender" />
@@ -76,7 +103,7 @@
                     android:id="@+id/tvOrigin"
 
                     style="@style/tv_black_characteristic"
-                    android:text="Origin"
+                    android:text="@string/origin"
                     app:layout_constraintEnd_toStartOf="@id/tvGreenOrigin"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvGreenOrigin" />
@@ -84,7 +111,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvLocation"
                     style="@style/tv_black_characteristic"
-                    android:text="Location"
+                    android:text="@string/location"
                     app:layout_constraintEnd_toStartOf="@id/tvGreenLocation"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvGreenLocation" />
@@ -93,8 +120,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvGreenSpecies"
                     style="@style/tv_green_characteristic"
-                    android:layout_marginStart="14dp"
-                    android:text="Species"
+                    android:layout_marginStart="@dimen/dp14"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tvSpecies"
                     app:layout_constraintTop_toBottomOf="@id/tvName" />
@@ -102,8 +128,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvGreenGender"
                     style="@style/tv_green_characteristic"
-                    android:layout_marginStart="14dp"
-                    android:text="Gender"
+                    android:layout_marginStart="@dimen/dp14"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tvGender"
                     app:layout_constraintTop_toBottomOf="@id/tvGreenSpecies" />
@@ -111,8 +136,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvGreenOrigin"
                     style="@style/tv_green_characteristic"
-                    android:layout_marginStart="14dp"
-                    android:text="Origin"
+                    android:layout_marginStart="@dimen/dp14"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tvOrigin"
                     app:layout_constraintTop_toBottomOf="@id/tvGreenGender" />
@@ -120,17 +144,17 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvGreenLocation"
                     style="@style/tv_green_characteristic"
-                    android:layout_marginStart="14dp"
-                    android:paddingEnd="42dp"
-                    android:text="Location"
+                    android:layout_marginStart="@dimen/dp14"
+                    android:paddingEnd="@dimen/dp42"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tvLocation"
-                    app:layout_constraintTop_toBottomOf="@id/tvGreenOrigin" />
+                    app:layout_constraintTop_toBottomOf="@id/tvGreenOrigin"
+                    tools:ignore="RtlSymmetry" />
 
                 <Button
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:layout_marginStart="6dp"
+                    android:layout_width="@dimen/dp36"
+                    android:layout_height="@dimen/dp36"
+                    android:layout_marginStart="@dimen/dp6"
                     android:background="@drawable/right"
                     app:layout_constraintBottom_toBottomOf="@id/tvGreenLocation"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -141,10 +165,10 @@
             <View
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="15dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="80dp"
+                android:layout_height="@dimen/dp1"
+                android:layout_marginStart="@dimen/dp15"
+                android:layout_marginTop="@dimen/dp20"
+                android:layout_marginEnd="@dimen/dp80"
                 android:background="@color/light_gray"
                 app:layout_constraintTop_toBottomOf="@id/characteristicsLayout" />
 
@@ -152,13 +176,13 @@
                 android:id="@+id/episodeLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/dp20"
                 app:layout_constraintTop_toBottomOf="@id/divider">
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_episode"
                     style="@style/tv_black_characteristic"
-                    android:text="Episode"
+                    android:text="@string/episode"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -167,7 +191,7 @@
                     android:id="@+id/recyclerEpisode"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
+                    android:layout_marginBottom="@dimen/dp8"
                     android:nestedScrollingEnabled="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/tv_episode"

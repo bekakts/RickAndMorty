@@ -3,67 +3,67 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="4dp"
     android:layout_width="match_parent"
-    android:layout_margin="8dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/dp8"
+    app:cardCornerRadius="@dimen/dp10"
+    app:cardElevation="@dimen/dp4">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:padding="10dp"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="@dimen/dp10">
 
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_location"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="@dimen/dp34"
+            android:layout_height="@dimen/dp34"
             android:background="@drawable/baseline_location_on_24"
-            android:layout_width="34dp"
-            android:layout_height="34dp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:textStyle="bold"
             android:id="@+id/tv_name"
-            app:layout_constraintTop_toBottomOf="@+id/tv_location"
-            app:layout_constraintStart_toStartOf="parent"
-            android:background="@color/dark_gray"
-            android:paddingStart="160dp"
-            android:textSize="20sp"
-            android:textColor="@color/black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/dark_gray"
+            android:paddingStart="@dimen/dp160"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp20"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_location"
             tools:ignore="RtlSymmetry" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:textColor="@color/black"
             android:id="@+id/tv_dimension"
-            app:layout_constraintTop_toBottomOf="@+id/tv_name"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp6"
             android:background="@color/dark_gray"
-            android:paddingStart="180dp"
-            android:layout_marginTop="6dp"
-            android:textSize="16sp"
-            android:layout_height="wrap_content"/>
+            android:paddingStart="@dimen/dp180"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name"
+            tools:ignore="RtlSymmetry" />
 
 
         <TextView
-            android:textColor="@color/black"
             android:id="@+id/tv_type"
-            app:layout_constraintTop_toBottomOf="@+id/tv_dimension"
-            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp6"
             android:background="@color/dark_gray"
-            android:paddingStart="130dp"
-            android:layout_marginTop="6dp"
-            android:textSize="16sp"
-            android:layout_height="wrap_content"/>
+            android:paddingStart="@dimen/dp130"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_dimension"
+            tools:ignore="RtlSymmetry" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </com.google.android.material.card.MaterialCardView>

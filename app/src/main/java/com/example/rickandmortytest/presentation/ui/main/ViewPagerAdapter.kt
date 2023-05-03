@@ -2,8 +2,6 @@ package com.example.rickandmortytest.presentation.ui.main
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.rickandmortytest.presentation.ui.characters.CharactersFragment
 import com.example.rickandmortytest.presentation.ui.episode.EpisodeFragment

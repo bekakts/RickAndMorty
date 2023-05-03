@@ -9,9 +9,8 @@ import com.bumptech.glide.Glide
 import com.example.rickandmortytest.databinding.ItemEpisodeCharacterBinding
 import com.example.rickandmortytest.domain.model.Character
 
-class EpisodeDetailAdapter(val onClick:(id:Int)->Unit) :
-    ListAdapter<Character, EpisodeDetailAdapter.EpisodeDetailViewHolder>(NoteDiffUtil()) {
-
+class EpisodeAndLocationDetailAdapter(val onClick: (id: Int) -> Unit) :
+    ListAdapter<Character, EpisodeAndLocationDetailAdapter.EpisodeDetailViewHolder>(NoteDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeDetailViewHolder {
         return EpisodeDetailViewHolder(
@@ -24,9 +23,8 @@ class EpisodeDetailAdapter(val onClick:(id:Int)->Unit) :
     }
 
     override fun onBindViewHolder(holder: EpisodeDetailViewHolder, position: Int) {
-       holder.bind(getItem(position))
+        holder.bind(getItem(position))
     }
-
 
     inner class EpisodeDetailViewHolder(private val binding: ItemEpisodeCharacterBinding) :
         RecyclerView.ViewHolder(binding.root) {

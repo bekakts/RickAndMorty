@@ -9,6 +9,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmortytest.R
 import com.example.rickandmortytest.databinding.FragmentEpisodeBinding
 import com.example.rickandmortytest.presentation.base.BaseFragment
+import com.example.rickandmortytest.presentation.utils.ConnectionLiveData
 import com.example.rickandmortytest.presentation.utils.LoadStatePagerAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -18,13 +19,20 @@ class EpisodeFragment : BaseFragment(R.layout.fragment_episode) {
     private val viewModel: EpisodesViewModel by viewModel()
     private val episodesAdapter = EpisodesAdapter(this::onClick)
     private var name: String? = null
+    private val loadStateAdapter = LoadStatePagerAdapter()
+    private lateinit var cld: ConnectionLiveData
 
-
-    override fun setupRequests() {
-        super.setupRequests()
-        viewModel.getEpisodes(name)
+    override fun isConnection() {
+        super.isConnection()
+        cld = ConnectionLiveData(requireActivity().application)
+        if (activity != null && isAdded) {
+            cld.observe(viewLifecycleOwner) { answer ->
+                if (answer) {
+                    viewModel.getEpisodes(name)
+                }
+            }
+        }
     }
-
 
     override fun setupSubscribers() {
         super.setupSubscribers()
@@ -79,7 +87,7 @@ class EpisodeFragment : BaseFragment(R.layout.fragment_episode) {
 
         with(binding) {
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            recyclerView.adapter = episodesAdapter.withLoadStateFooter(LoadStatePagerAdapter())
+            recyclerView.adapter = episodesAdapter.withLoadStateFooter(loadStateAdapter)
 
         }
     }
@@ -87,5 +95,6 @@ class EpisodeFragment : BaseFragment(R.layout.fragment_episode) {
     private fun onClick(id: Int) {
         findNavController().navigate(R.id.episodeDetailFragment, bundleOf("keyEpisode" to id))
     }
+
 
 }

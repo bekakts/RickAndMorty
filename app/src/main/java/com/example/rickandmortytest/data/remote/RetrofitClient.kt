@@ -15,7 +15,7 @@ val networkModules: Module = module {
 }
 
 
-fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit{
+fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
         .baseUrl("https://rickandmortyapi.com/api/")
         .addConverterFactory(GsonConverterFactory.create())
@@ -28,9 +28,9 @@ fun provideOkHttpClient(): OkHttpClient {
     interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
     return OkHttpClient.Builder()
-        .writeTimeout(20,TimeUnit.SECONDS)
-        .readTimeout(20,TimeUnit.SECONDS)
-        .connectTimeout(20,TimeUnit.SECONDS)
+        .writeTimeout(20, TimeUnit.SECONDS)
+        .readTimeout(20, TimeUnit.SECONDS)
+        .connectTimeout(20, TimeUnit.SECONDS)
         .addInterceptor(interceptor)
         .build()
 }

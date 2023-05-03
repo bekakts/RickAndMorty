@@ -8,6 +8,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmortytest.R
 import com.example.rickandmortytest.databinding.FragmentEpisodeDetailBinding
 import com.example.rickandmortytest.presentation.base.BaseFragment
+import com.example.rickandmortytest.presentation.utils.ConnectionLiveData
 import com.example.rickandmortytest.presentation.utils.UIState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -16,15 +17,22 @@ class EpisodeDetailFragment : BaseFragment(R.layout.fragment_episode_detail) {
 
     private val binding: FragmentEpisodeDetailBinding by viewBinding(FragmentEpisodeDetailBinding::bind)
     private val viewModel: EpisodeDetailViewModel by viewModel()
-    private val characterAdapter = EpisodeDetailAdapter(this::onClick)
+    private val characterAdapter = EpisodeAndLocationDetailAdapter(this::onClick)
     private var id = arrayListOf<Int>()
     private val idCharacter = arrayListOf<Int>()
+    private lateinit var cld: ConnectionLiveData
 
-
-    override fun setupRequests() {
-        super.setupRequests()
-        recieveId()
-        viewModel.getEpisode(id)
+    override fun isConnection() {
+        super.isConnection()
+        cld = ConnectionLiveData(requireActivity().application)
+        if (activity != null && isAdded) {
+            cld.observe(viewLifecycleOwner) { answer ->
+                if (answer) {
+                    recieveId()
+                    viewModel.getEpisode(id)
+                }
+            }
+        }
     }
 
     override fun setupSubscribers() {
@@ -69,6 +77,15 @@ class EpisodeDetailFragment : BaseFragment(R.layout.fragment_episode_detail) {
         with(binding) {
             recyclerEpisode.layoutManager = LinearLayoutManager(requireContext())
             recyclerEpisode.adapter = characterAdapter
+        }
+    }
+
+    override fun initClickListeners() {
+        super.initClickListeners()
+        with(binding) {
+            btnBack.setOnClickListener {
+                findNavController().navigateUp()
+            }
         }
     }
 

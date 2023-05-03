@@ -17,6 +17,7 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmortytest.R
 import com.example.rickandmortytest.databinding.FragmentCharactersBinding
 import com.example.rickandmortytest.presentation.base.BaseFragment
+import com.example.rickandmortytest.presentation.utils.ConnectionLiveData
 import com.example.rickandmortytest.presentation.utils.LoadStatePagerAdapter
 import com.example.rickandmortytest.presentation.utils.initDialog
 import kotlinx.coroutines.flow.collect
@@ -36,6 +37,20 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
     private var statusId: RadioButton? = null
     private var speciesId: RadioButton? = null
     private var genderId: RadioButton? = null
+    private lateinit var cld: ConnectionLiveData
+    private val loadStateAdapter = LoadStatePagerAdapter()
+
+    override fun isConnection() {
+        super.isConnection()
+        cld = ConnectionLiveData(requireActivity().application)
+        if (activity != null && isAdded) {
+            cld.observe(viewLifecycleOwner) { answer ->
+                if (answer) {
+                    viewModel.getCharacter(name, statusID, speciesID, genderID)
+                }
+            }
+        }
+    }
 
     override fun setupRequests() {
         super.setupRequests()
@@ -58,6 +73,7 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
         setupRecyclerView()
         searchLogic()
         initObserve()
+
     }
 
     private fun initObserve() {
@@ -90,7 +106,6 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
             }
         }
     }
-
 
     @SuppressLint("ResourceType", "InflateParams")
     private fun filterLogic() {
@@ -152,7 +167,7 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
 
     private fun setupRecyclerView() {
         with(binding) {
-            recyclerView.adapter = characterAdapter.withLoadStateFooter(LoadStatePagerAdapter())
+            recyclerView.adapter = characterAdapter.withLoadStateFooter(loadStateAdapter)
             recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         }
     }

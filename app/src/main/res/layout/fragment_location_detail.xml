@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/light_gray"
-        android:elevation="2dp"
+        android:elevation="@dimen/dp2"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
@@ -19,16 +19,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Location"
+            android:text="@string/location"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="@dimen/sp18"
             android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:background="@drawable/back" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/dp0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_episode">
 
@@ -40,72 +46,68 @@
                 android:id="@+id/progress"
                 layout="@layout/item_progress_bar"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="@dimen/dp0"
                 app:layout_constraintBottom_toTopOf="@id/locatioonDevider"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/characteristicContainer"
                 android:layout_width="match_parent"
-                android:visibility="invisible"
                 android:layout_height="wrap_content"
+                android:visibility="invisible"
                 app:layout_constraintTop_toTopOf="parent">
 
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_name"
                     style="@style/tv_black_characteristic"
-                    android:text="Name"
-                    app:layout_constraintEnd_toStartOf="@id/tvGreenName"
+                    android:text="@string/name"
                     app:layout_constraintBottom_toBottomOf="@id/tvGreenName"
+                    app:layout_constraintEnd_toStartOf="@id/tvGreenName"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvGreenName" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_type"
                     style="@style/tv_black_characteristic"
-                    android:text="Type"
-                    app:layout_constraintEnd_toStartOf="@id/tvGreenType"
+                    android:text="@string/type"
                     app:layout_constraintBottom_toBottomOf="@id/tvGreenType"
+                    app:layout_constraintEnd_toStartOf="@id/tvGreenType"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvGreenType" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_dimension"
                     style="@style/tv_black_characteristic"
-                    android:text="Dimension"
-                    app:layout_constraintEnd_toStartOf="@id/tvGreenDimension"
+                    android:text="@string/dimension"
                     app:layout_constraintBottom_toBottomOf="@id/tvGreenDimension"
+                    app:layout_constraintEnd_toStartOf="@id/tvGreenDimension"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/tvGreenDimension" />
-
 
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvGreenName"
                     style="@style/tv_green_characteristic"
-                    android:layout_marginStart="16dp"
-                    android:text="Pilot"
-                    app:layout_constraintStart_toEndOf="@id/tv_name"
+                    android:layout_marginStart="@dimen/dp16"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_name"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvGreenType"
-                    app:layout_constraintStart_toEndOf="@id/tv_type"
-                    android:layout_marginStart="16dp"
                     style="@style/tv_green_characteristic"
-                    android:text="December 2, 2013"
+                    android:layout_marginStart="@dimen/dp16"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_type"
                     app:layout_constraintTop_toBottomOf="@id/tvGreenName" />
 
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvGreenDimension"
                     style="@style/tv_green_characteristic"
-                    android:text="S01E01"
-                    app:layout_constraintStart_toEndOf="@id/tv_dimension"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="@dimen/dp16"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_dimension"
                     app:layout_constraintTop_toBottomOf="@id/tvGreenType" />
 
 
@@ -114,18 +116,18 @@
             <View
                 android:id="@+id/locatioonDevider"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_height="@dimen/dp1"
+                android:layout_marginStart="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp20"
+                android:layout_marginEnd="@dimen/dp20"
                 android:background="@color/black"
                 app:layout_constraintTop_toBottomOf="@id/characteristicContainer" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_characters"
                 style="@style/tv_black_characteristic"
-                android:layout_marginTop="20dp"
-                android:text="Characters"
+                android:layout_marginTop="@dimen/dp20"
+                android:text="@string/characters"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/locatioonDevider" />
 
@@ -133,7 +135,7 @@
                 android:id="@+id/shimmerLocationDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="@dimen/dp6"
                 app:layout_constraintTop_toBottomOf="@id/tv_characters">
 
                 <LinearLayout
@@ -161,7 +163,7 @@
                 android:id="@+id/recyclerLocation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/dp20"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/tv_characters"
                 tools:listitem="@layout/item_episode_character" />

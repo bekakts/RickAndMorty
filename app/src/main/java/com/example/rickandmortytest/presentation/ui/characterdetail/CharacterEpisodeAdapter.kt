@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortytest.databinding.ItemCharacterEpisodeBinding
 import com.example.rickandmortytest.domain.model.Episode
 
-class CharacterEpisodeAdapter(val onClick:(id:Int)->Unit) :
+class CharacterEpisodeAdapter(val onClick: (id: Int) -> Unit) :
     ListAdapter<Episode, CharacterEpisodeAdapter.CharacterEpisodeViewHolder>(NoteDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterEpisodeViewHolder {
@@ -23,7 +23,7 @@ class CharacterEpisodeAdapter(val onClick:(id:Int)->Unit) :
     }
 
     override fun onBindViewHolder(holder: CharacterEpisodeViewHolder, position: Int) {
-        holder.bind(getItem(position),position)
+        holder.bind(getItem(position), position)
     }
 
     inner class CharacterEpisodeViewHolder(private val binding: ItemCharacterEpisodeBinding) :
@@ -36,7 +36,7 @@ class CharacterEpisodeAdapter(val onClick:(id:Int)->Unit) :
                 }
                 tvName.text = episode.name
                 tvAirDate.text = episode.air_date
-                tvNum.text = (position +1).toString()
+                tvNum.text = (position + 1).toString()
 
             }
         }

@@ -3,20 +3,20 @@
 
     
     <style name="tv_characteristic" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">@dimen/sp20</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_width">@dimen/dp0</item>
     </style>
 
     <style name="tv_black_characteristic" parent="tv_characteristic">
         <item name="android:textColor">@color/black</item>
-        <item name="android:layout_marginStart">20dp</item>
+        <item name="android:layout_marginStart">@dimen/dp20</item>
     </style>
 
     <style name="tv_green_characteristic" parent="tv_characteristic">
         <item name="android:textColor">@color/green</item>
-        <item name="android:layout_marginEnd">14dp</item>
-        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginEnd">@dimen/dp14</item>
+        <item name="android:layout_marginTop">@dimen/dp16</item>
     </style>
 
     <style name="round_button" parent="Widget.Material3.Button">

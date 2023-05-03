@@ -1,5 +1,6 @@
 package com.example.rickandmortytest.presentation.ui.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,14 +22,16 @@ class MainFragment : Fragment() {
         return binding.root
     }
 
+
+    @SuppressLint("SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val pagerAdapter = ViewPagerAdapter(requireActivity())
-     binding.viewPager.adapter = pagerAdapter
+        binding.viewPager.adapter = pagerAdapter
         TabLayoutMediator(
-           binding.tabLayout,binding.viewPager
+            binding.tabLayout, binding.viewPager
         ) { tab, position ->
-            val tabNames = listOf("Character","Location","Episode")
+            val tabNames = listOf("Character", "Location", "Episode")
             tab.text = tabNames[position]
         }.attach()
     }

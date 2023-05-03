@@ -1,5 +1,31 @@
 <resources>
     <string name="app_name">RickAndMortyTest</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="picture_of_character">Picture of character</string>
+    <string name="alive">Alive</string>
+    <string name="dead">Dead</string>
+    <string name="unknown">Unknown</string>
+    <string name="human">Human</string>
+    <string name="humanoid">Humanoid</string>
+    <string name="alien">Alien</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="genderless">Genderless</string>
+    <string name="clear">Clear</string>
+    <string name="search">Search</string>
+    <string name="character">Character</string>
+    <string name="species">Species</string>
+    <string name="gender">Gender</string>
+    <string name="origin">Origin</string>
+    <string name="location">Location</string>
+    <string name="episode">Episode</string>
+    <string name="filter">Filter</string>
+    <string name="Search">Поиск</string>
+    <string name="name">Name</string>
+    <string name="air_date">Air Date</string>
+    <string name="pilot">Pilot</string>
+    <string name="december_2_2013">December 2, 2013</string>
+    <string name="characters">Characters</string>
+    <string name="type">Type</string>
+    <string name="dimension">Dimension</string>
 </resources>

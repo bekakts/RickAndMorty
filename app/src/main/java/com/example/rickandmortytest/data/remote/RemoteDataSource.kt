@@ -19,11 +19,11 @@ class RemoteDataSource(private val api: Api) : BaseDataSource() {
     }
 
 
-    suspend fun getLocation(id:Int):Resource<LocationEntity>{
+    suspend fun getLocation(id: Int): Resource<LocationEntity> {
         return getResult { api.getLocationByID(id) }
     }
 
-    suspend fun getEpisode(id:List<Int>):Resource<List<EpisodeEntity>>{
+    suspend fun getEpisode(id: List<Int>): Resource<List<EpisodeEntity>> {
         return getResult { api.getEpisodeByID(id) }
     }
 

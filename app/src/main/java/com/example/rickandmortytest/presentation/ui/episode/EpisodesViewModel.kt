@@ -8,19 +8,18 @@ import com.example.rickandmortytest.presentation.utils.UIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
-class EpisodesViewModel(private val getEpisodesUseCase: GetEpisodes):BaseViewModel() {
+class EpisodesViewModel(private val getEpisodesUseCase: GetEpisodes) : BaseViewModel() {
 
     private val _getEpisodesState = MutableStateFlow<UIState<PagingData<Episode>>>(UIState.Empty())
     val getEpisodesState = _getEpisodesState.asStateFlow()
 
-    fun getEpisodes(name:String? = null){
+    fun getEpisodes(name: String? = null) {
         getEpisodesUseCase(name).collectFlow(_getEpisodesState)
     }
 
-    fun invalidate(){
+    fun invalidate() {
         _getEpisodesState.value = UIState.Empty()
     }
-
 
 
 }

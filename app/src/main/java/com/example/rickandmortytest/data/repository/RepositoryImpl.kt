@@ -1,6 +1,5 @@
 package com.example.rickandmortytest.data.repository
 
-import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -12,6 +11,7 @@ import com.example.rickandmortytest.data.pagingsource.episodes.EpisodesPagingSou
 import com.example.rickandmortytest.data.pagingsource.locations.LocationsPagingSource
 import com.example.rickandmortytest.data.remote.Api
 import com.example.rickandmortytest.data.remote.RemoteDataSource
+import com.example.rickandmortytest.domain.model.Character
 import com.example.rickandmortytest.domain.model.Episode
 import com.example.rickandmortytest.domain.model.Location
 import com.example.rickandmortytest.domain.repository.Repository
@@ -20,13 +20,25 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import com.example.rickandmortytest.domain.model.Character
 
 class RepositoryImpl(private val dataSource: RemoteDataSource, private val api: Api) : Repository {
 
-    override fun getCharacters(name: String?, status:String?, species:String?, gender: String?): Flow<PagingData<Character>> {
-        val remotePagingSource = CharactersPagingSource(name,status,species,gender,
-            requestFunction = { page,names,statuses,specieses,genders-> api.getCharacters(page,names,statuses,specieses,genders) },
+    override fun getCharacters(
+        name: String?,
+        status: String?,
+        species: String?,
+        gender: String?
+    ): Flow<PagingData<Character>> {
+        val remotePagingSource = CharactersPagingSource(name, status, species, gender,
+            requestFunction = { page, names, statuses, specieses, genders ->
+                api.getCharacters(
+                    page,
+                    names,
+                    statuses,
+                    specieses,
+                    genders
+                )
+            },
             mapper = { response -> response.results.map { it.toCharacter() } }
         )
         return Pager(
@@ -60,7 +72,7 @@ class RepositoryImpl(private val dataSource: RemoteDataSource, private val api: 
     override fun getCharacter(id: List<Int>): Flow<Resource<List<Character>>> =
         flow {
             emit(Resource.Loading())
-            val response = dataSource.getCharacter(id).data?.map {  it.toCharacter()}
+            val response = dataSource.getCharacter(id).data?.map { it.toCharacter() }
             emit(Resource.Success(response))
         }.flowOn(Dispatchers.IO)
 

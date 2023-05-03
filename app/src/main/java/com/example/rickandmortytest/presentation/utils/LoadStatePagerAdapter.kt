@@ -26,12 +26,10 @@ class LoadStatePagerAdapter :
         )
     }
 
-
     inner class CharacterLoadStateViewHolder(private val binding: ItemProgressBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(loadState: LoadState) {
-
         }
     }
 }

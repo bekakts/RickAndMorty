@@ -10,9 +10,9 @@ import com.example.rickandmortytest.domain.usecases.episode.GetEpisode
 import kotlinx.coroutines.flow.asStateFlow
 
 class EpisodeDetailViewModel(
-    private val getCharacterUseCase:GetCharacter,
-    private val getEpisodeUseCase:GetEpisode
-):BaseViewModel() {
+    private val getCharacterUseCase: GetCharacter,
+    private val getEpisodeUseCase: GetEpisode
+) : BaseViewModel() {
 
     private val _getCharacterState = MutableStateFlow<UIState<List<Character>>>(UIState.Empty())
     val getCharacterState = _getCharacterState.asStateFlow()
@@ -24,10 +24,9 @@ class EpisodeDetailViewModel(
     private val _getEpisodeState = MutableStateFlow<UIState<List<Episode>>>(UIState.Empty())
     val getEpisodeState = _getEpisodeState.asStateFlow()
 
-    fun getEpisode(id:List<Int>){
+    fun getEpisode(id: List<Int>) {
         getEpisodeUseCase(id).collectDetailFlow(_getEpisodeState)
     }
-
 
 
 }

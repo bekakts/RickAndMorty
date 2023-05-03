@@ -25,7 +25,6 @@ class CharactersViewModel(private val getCharacterUseCase: GetCharacters) : Base
         _getCharacterState.value = UIState.Empty()
     }
 
-
     val status = MutableLiveData<String>()
     val species = MutableLiveData<String>()
     val gender = MutableLiveData<String>()

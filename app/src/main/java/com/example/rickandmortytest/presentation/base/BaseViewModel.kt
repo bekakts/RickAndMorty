@@ -15,8 +15,7 @@ import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel() {
 
-
-    protected fun <T:Any> Flow<PagingData<T>>.collectFlow(_state: MutableStateFlow<UIState<PagingData<T>>>) {
+    protected fun <T : Any> Flow<PagingData<T>>.collectFlow(_state: MutableStateFlow<UIState<PagingData<T>>>) {
         viewModelScope.launch(Dispatchers.IO) {
             _state.value = UIState.Loading()
             try {
@@ -29,7 +28,7 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
-    protected fun <T:Any> Flow<Resource<T>>.collectDetailFlow(
+    protected fun <T : Any> Flow<Resource<T>>.collectDetailFlow(
         _state: MutableStateFlow<UIState<T>>
     ) {
         viewModelScope.launch(Dispatchers.IO) {

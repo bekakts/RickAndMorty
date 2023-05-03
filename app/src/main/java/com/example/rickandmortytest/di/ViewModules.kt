@@ -12,9 +12,9 @@ import org.koin.dsl.module
 
 val viewModules: Module = module {
     viewModel { CharactersViewModel(get()) }
-    viewModel { CharacterDetailViewModel(get(),get(),get()) }
+    viewModel { CharacterDetailViewModel(get(), get()) }
     viewModel { EpisodesViewModel(get()) }
-    viewModel { EpisodeDetailViewModel(get(),get()) }
+    viewModel { EpisodeDetailViewModel(get(), get()) }
     viewModel { LocationsViewModel(get()) }
-    viewModel { LocationDetailViewModel(get(),get()) }
+    viewModel { LocationDetailViewModel(get(), get()) }
 }

@@ -6,22 +6,22 @@ import com.example.rickandmortytest.domain.model.Location
 import retrofit2.Response
 
 class LocationsPagingSource<T : Any>(
-    private val name:String? = null,
-    private val requestFunction: suspend (page: Int,name:String?) -> Response<T>,
+    private val name: String? = null,
+    private val requestFunction: suspend (page: Int, name: String?) -> Response<T>,
     private val mapper: (T) -> List<Location>
 ) : PagingSource<Int, Location>() {
 
-    override fun getRefreshKey(state: PagingState<Int, Location>): Int?{
-        return state.anchorPosition?.let{
-            val page = state.closestPageToPosition(it)?.prevKey?:1
-            page-1
+    override fun getRefreshKey(state: PagingState<Int, Location>): Int? {
+        return state.anchorPosition?.let {
+            val page = state.closestPageToPosition(it)?.prevKey ?: 1
+            page - 1
         }
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Location> {
         return try {
             val currentPage = params.key ?: 1
-            val response = requestFunction(currentPage,name)
+            val response = requestFunction(currentPage, name)
 
             if (response.isSuccessful) {
                 val data = response.body()?.let { mapper(it) } ?: emptyList()

@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.rickandmortytest.R
 import com.example.rickandmortytest.databinding.FragmentCharacterDetailBinding
 import com.example.rickandmortytest.presentation.base.BaseFragment
+import com.example.rickandmortytest.presentation.utils.ConnectionLiveData
 import com.example.rickandmortytest.presentation.utils.UIState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -22,11 +23,19 @@ class CharacterDetailFragment : BaseFragment(R.layout.fragment_character_detail)
     private var idEpisode = arrayListOf<Int>()
     private var idLocation: Int? = null
     private val episodeAdapter = CharacterEpisodeAdapter(this::onClick)
+    private lateinit var cld: ConnectionLiveData
 
-    override fun setupRequests() {
-        super.setupRequests()
-        receiveId()
-        viewModel.getCharacter(id)
+    override fun isConnection() {
+        super.isConnection()
+        cld = ConnectionLiveData(requireActivity().application)
+        if (activity != null && isAdded) {
+            cld.observe(viewLifecycleOwner) { answer ->
+                if (answer) {
+                    receiveId()
+                    viewModel.getCharacter(id)
+                }
+            }
+        }
     }
 
     override fun initialize() {
@@ -44,6 +53,9 @@ class CharacterDetailFragment : BaseFragment(R.layout.fragment_character_detail)
                         bundleOf("keyLocation" to idLocation)
                     )
                 }
+            }
+            btnBack.setOnClickListener {
+                findNavController().navigateUp()
             }
         }
     }
@@ -65,8 +77,6 @@ class CharacterDetailFragment : BaseFragment(R.layout.fragment_character_detail)
             onSuccess = {
                 if (it[0].location.url?.isNotEmpty() == true) {
                     it[0].location.url?.substringAfterLast("/")
-                        ?.let { it1 -> viewModel.getLocation(it1.toInt()) }
-                    it[0].location.url?.substringAfterLast("/")
                         ?.let { it1 -> idLocation = it1.toInt() }
                 }
                 if (it[0].episode?.isNotEmpty() == true) {
@@ -86,16 +96,8 @@ class CharacterDetailFragment : BaseFragment(R.layout.fragment_character_detail)
             }
         )
 
-        viewModel.getLocationState.collectUIState(
-            state = null,
-            onSuccess = {
-            }
-        )
-
         viewModel.getEpisodeState.collectUIState(
-            state = {
-                //binding.progressEpisode.isVisible = it is UIState.Loading
-            },
+            state = null,
             onSuccess = {
                 episodeAdapter.submitList(it)
             }

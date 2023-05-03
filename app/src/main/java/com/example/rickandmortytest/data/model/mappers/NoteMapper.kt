@@ -4,7 +4,7 @@ import com.example.rickandmortytest.data.model.*
 import com.example.rickandmortytest.domain.model.*
 
 
-fun CharacterEntity.toCharacter(): Character{
+fun CharacterEntity.toCharacter(): Character {
     return Character(
         id,
         image,
@@ -18,14 +18,14 @@ fun CharacterEntity.toCharacter(): Character{
     )
 }
 
-fun OriginEntity.toOrigin():Origin{
+fun OriginEntity.toOrigin(): Origin {
     return Origin(
         name,
         url
     )
 }
 
-fun LocationCharacterEntity.toLocationCharacter(): LocationCharacter{
+fun LocationCharacterEntity.toLocationCharacter(): LocationCharacter {
     return LocationCharacter(
         name,
         url
@@ -33,7 +33,7 @@ fun LocationCharacterEntity.toLocationCharacter(): LocationCharacter{
 }
 
 
-fun LocationEntity.toLocation():Location{
+fun LocationEntity.toLocation(): Location {
     return Location(
         id,
         name,
@@ -43,7 +43,7 @@ fun LocationEntity.toLocation():Location{
     )
 }
 
-fun EpisodeEntity.toEpisode():Episode{
+fun EpisodeEntity.toEpisode(): Episode {
     return Episode(
         id,
         name,

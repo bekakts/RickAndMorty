@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.rickandmortytest.databinding.ItemEpisodeBinding
 import com.example.rickandmortytest.domain.model.Episode
 
-class EpisodesAdapter(val onClick:(id:Int) ->Unit) :
+class EpisodesAdapter(val onClick: (id: Int) -> Unit) :
     PagingDataAdapter<Episode, EpisodesAdapter.EpisodesViewHolder>(NoteDiffUtil()) {
 
 

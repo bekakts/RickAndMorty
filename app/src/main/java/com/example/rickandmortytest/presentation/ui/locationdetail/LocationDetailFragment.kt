@@ -8,7 +8,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmortytest.R
 import com.example.rickandmortytest.databinding.FragmentLocationDetailBinding
 import com.example.rickandmortytest.presentation.base.BaseFragment
-import com.example.rickandmortytest.presentation.ui.episodedetail.EpisodeDetailAdapter
+import com.example.rickandmortytest.presentation.ui.episodedetail.EpisodeAndLocationDetailAdapter
+import com.example.rickandmortytest.presentation.utils.ConnectionLiveData
 import com.example.rickandmortytest.presentation.utils.UIState
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -16,15 +17,32 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class LocationDetailFragment : BaseFragment(R.layout.fragment_location_detail) {
 
     private val binding: FragmentLocationDetailBinding by viewBinding(FragmentLocationDetailBinding::bind)
-    private val characterAdapter = EpisodeDetailAdapter(this::onClick)
+    private val characterAdapter = EpisodeAndLocationDetailAdapter(this::onClick)
     private val viewModel: LocationDetailViewModel by viewModel()
     private var id = 1
     private val idCharacters = arrayListOf<Int>()
+    private lateinit var cld: ConnectionLiveData
 
-    override fun setupRequests() {
-        super.setupRequests()
-        recieveId()
-        viewModel.getLocation(id)
+    override fun isConnection() {
+        super.isConnection()
+        cld = ConnectionLiveData(requireActivity().application)
+        if (activity != null && isAdded) {
+            cld.observe(viewLifecycleOwner) { answer ->
+                if (answer) {
+                    recieveId()
+                    viewModel.getLocation(id)
+                }
+            }
+        }
+    }
+
+    override fun initClickListeners() {
+        super.initClickListeners()
+        with(binding){
+            btnBack.setOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
     }
 
     override fun setupSubscribers() {

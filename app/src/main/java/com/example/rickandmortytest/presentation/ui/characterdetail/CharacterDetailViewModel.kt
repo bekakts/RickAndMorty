@@ -1,19 +1,16 @@
 package com.example.rickandmortytest.presentation.ui.characterdetail
 
+import com.example.rickandmortytest.domain.model.Character
 import com.example.rickandmortytest.domain.model.Episode
-import com.example.rickandmortytest.domain.model.Location
 import com.example.rickandmortytest.domain.usecases.character.GetCharacter
 import com.example.rickandmortytest.domain.usecases.episode.GetEpisode
-import com.example.rickandmortytest.domain.usecases.location.GetLocation
 import com.example.rickandmortytest.presentation.base.BaseViewModel
 import com.example.rickandmortytest.presentation.utils.UIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import com.example.rickandmortytest.domain.model.Character
 
 class CharacterDetailViewModel(
     private val getCharacterUseCase: GetCharacter,
-    private val getLocationUseCase: GetLocation,
     private val getEpisodeUseCase: GetEpisode
 ) : BaseViewModel() {
 
@@ -23,13 +20,6 @@ class CharacterDetailViewModel(
 
     fun getCharacter(id: List<Int>) {
         getCharacterUseCase(id).collectDetailFlow(_getCharacterState)
-    }
-
-    private val _getLocationState = MutableStateFlow<UIState<Location>>(UIState.Empty())
-    val getLocationState = _getLocationState.asStateFlow()
-
-    fun getLocation(id: Int) {
-        getLocationUseCase(id).collectDetailFlow(_getLocationState)
     }
 
     private val _getEpisodeState = MutableStateFlow<UIState<List<Episode>>>(UIState.Empty())

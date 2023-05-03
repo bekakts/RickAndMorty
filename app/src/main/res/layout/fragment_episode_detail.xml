@@ -6,12 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".presentation.ui.episodedetail.EpisodeDetailFragment">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_episode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/light_gray"
-        android:elevation="2dp"
+        android:elevation="@dimen/dp2"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textview.MaterialTextView
@@ -19,16 +20,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="Episode"
+            android:text="@string/episode"
             android:textColor="@color/black"
-            android:textSize="18sp"
+            android:textSize="@dimen/sp18"
             android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="@dimen/dp40"
+            android:layout_height="@dimen/dp40"
+            android:background="@drawable/back" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/dp0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_episode">
 
@@ -40,7 +47,7 @@
                 android:id="@+id/progress"
                 layout="@layout/item_progress_bar"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="@dimen/dp0"
                 app:layout_constraintBottom_toTopOf="@id/episodeDevider"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -54,7 +61,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_name"
                     style="@style/tv_black_characteristic"
-                    android:text="Name"
+                    android:text="@string/name"
                     app:layout_constraintBottom_toBottomOf="@id/tvGreenName"
                     app:layout_constraintEnd_toStartOf="@id/tvGreenName"
                     app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +70,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_air_date"
                     style="@style/tv_black_characteristic"
-                    android:text="Air Date"
+                    android:text="@string/air_date"
                     app:layout_constraintBottom_toBottomOf="@id/tvGreenAirDate"
                     app:layout_constraintEnd_toStartOf="@id/tvGreenAirDate"
                     app:layout_constraintStart_toStartOf="parent"
@@ -72,7 +79,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tv_episode"
                     style="@style/tv_black_characteristic"
-                    android:text="Episode"
+                    android:text="@string/episode"
                     app:layout_constraintBottom_toBottomOf="@id/tvGreenEpisode"
                     app:layout_constraintEnd_toStartOf="@id/tvGreenEpisode"
                     app:layout_constraintStart_toStartOf="parent"
@@ -81,8 +88,8 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvGreenName"
                     style="@style/tv_green_characteristic"
-                    android:layout_marginStart="16dp"
-                    android:text="Pilot"
+                    android:layout_marginStart="@dimen/dp16"
+                    android:text="@string/pilot"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tv_name"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -90,8 +97,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvGreenAirDate"
                     style="@style/tv_green_characteristic"
-                    android:layout_marginStart="16dp"
-                    android:text="December 2, 2013"
+                    android:layout_marginStart="@dimen/dp16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tv_air_date"
                     app:layout_constraintTop_toBottomOf="@id/tvGreenName" />
@@ -99,8 +105,7 @@
                 <com.google.android.material.textview.MaterialTextView
                     android:id="@+id/tvGreenEpisode"
                     style="@style/tv_green_characteristic"
-                    android:layout_marginStart="16dp"
-                    android:text="S01E01"
+                    android:layout_marginStart="@dimen/dp16"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/tv_episode"
                     app:layout_constraintTop_toBottomOf="@id/tvGreenAirDate" />
@@ -110,18 +115,18 @@
             <View
                 android:id="@+id/episodeDevider"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginStart="20dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_height="@dimen/dp1"
+                android:layout_marginStart="@dimen/dp20"
+                android:layout_marginTop="@dimen/dp20"
+                android:layout_marginEnd="@dimen/dp20"
                 android:background="@color/black"
                 app:layout_constraintTop_toBottomOf="@id/characteristicContainer" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/tv_characters"
                 style="@style/tv_black_characteristic"
-                android:layout_marginTop="20dp"
-                android:text="Characters"
+                android:layout_marginTop="@dimen/dp20"
+                android:text="@string/characters"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/episodeDevider" />
 
@@ -130,7 +135,7 @@
                 android:id="@+id/shimmerEpisodeDetail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="@dimen/dp6"
                 app:layout_constraintTop_toBottomOf="@id/tv_characters">
 
                 <LinearLayout
@@ -158,7 +163,7 @@
                 android:id="@+id/recyclerEpisode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="@dimen/dp6"
                 android:visibility="gone"
                 app:layout_constraintTop_toBottomOf="@id/tv_characters"
                 tools:listitem="@layout/item_episode_character" />
