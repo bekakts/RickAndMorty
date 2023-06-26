@@ -43,97 +43,100 @@
         android:elevation="@dimen/dp2"
         app:layout_constraintTop_toBottomOf="@+id/search_characters">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <include
+                android:id="@+id/shimmerLeft1"
+                layout="@layout/shimmer_characters"
+                android:layout_width="@dimen/dp0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp6"
+                android:layout_marginEnd="@dimen/dp6"
+                app:layout_constraintEnd_toStartOf="@id/shimmerRight1"
+                app:layout_constraintStart_toStartOf="parent"
 
-                <include
-                    android:id="@+id/shimmerLeft"
-                    layout="@layout/shimmer_characters"
-                    android:layout_width="@dimen/dp0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp6"
-                    android:layout_marginEnd="@dimen/dp6"
-                    app:layout_constraintEnd_toStartOf="@id/shimmerRight"
-                    app:layout_constraintStart_toStartOf="parent"
+                />
 
-                    />
+            <include
+                android:id="@+id/shimmerRight1"
+                layout="@layout/shimmer_characters"
+                android:layout_width="@dimen/dp0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp6"
+                android:layout_marginEnd="@dimen/dp6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/shimmerLeft1"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <include
-                    android:id="@+id/shimmerRight"
-                    layout="@layout/shimmer_characters"
-                    android:layout_width="@dimen/dp0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp6"
-                    android:layout_marginEnd="@dimen/dp6"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/shimmerLeft"
+            <include
+                android:id="@+id/shimmerLeft2"
+                layout="@layout/shimmer_characters"
+                android:layout_width="@dimen/dp0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp6"
+                android:layout_marginEnd="@dimen/dp6"
+                app:layout_constraintEnd_toStartOf="@id/shimmerRight2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerRight1" />
 
-                    />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <include
+                android:id="@+id/shimmerRight2"
+                layout="@layout/shimmer_characters"
+                android:layout_width="@dimen/dp0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp6"
+                android:layout_marginEnd="@dimen/dp6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/shimmerLeft2"
+                app:layout_constraintTop_toBottomOf="@id/shimmerLeft1" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <include
+                android:id="@+id/shimmerLeft3"
+                layout="@layout/shimmer_characters"
+                android:layout_width="@dimen/dp0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp6"
+                android:layout_marginEnd="@dimen/dp6"
+                app:layout_constraintEnd_toStartOf="@id/shimmerRight3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerRight2" />
 
-                <include
-                    android:id="@+id/shimmerLeft2"
-                    layout="@layout/shimmer_characters"
-                    android:layout_width="@dimen/dp0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp6"
-                    android:layout_marginEnd="@dimen/dp6"
-                    app:layout_constraintEnd_toStartOf="@id/shimmerRight2"
-                    app:layout_constraintStart_toStartOf="parent"
+            <include
+                android:id="@+id/shimmerRight3"
+                layout="@layout/shimmer_characters"
+                android:layout_width="@dimen/dp0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp6"
+                android:layout_marginEnd="@dimen/dp6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/shimmerLeft3"
+                app:layout_constraintTop_toBottomOf="@id/shimmerLeft2" />
 
-                    />
+            <include
+                android:id="@+id/shimmerLeft4"
+                layout="@layout/shimmer_characters"
+                android:layout_width="@dimen/dp0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp6"
+                android:layout_marginEnd="@dimen/dp6"
+                app:layout_constraintEnd_toStartOf="@id/shimmerRight4"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/shimmerRight3" />
 
-                <include
-                    android:id="@+id/shimmerRight2"
-                    layout="@layout/shimmer_characters"
-                    android:layout_width="@dimen/dp0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp6"
-                    android:layout_marginEnd="@dimen/dp6"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/shimmerLeft2"
+            <include
+                android:id="@+id/shimmerRight4"
+                layout="@layout/shimmer_characters"
+                android:layout_width="@dimen/dp0"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp6"
+                android:layout_marginEnd="@dimen/dp6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/shimmerLeft4"
+                app:layout_constraintTop_toBottomOf="@id/shimmerLeft3" />
 
-                    />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <include
-                    android:id="@+id/shimmerLeft3"
-                    layout="@layout/shimmer_characters"
-                    android:layout_width="@dimen/dp0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp6"
-                    android:layout_marginEnd="@dimen/dp6"
-                    app:layout_constraintEnd_toStartOf="@id/shimmerRight3"
-                    app:layout_constraintStart_toStartOf="parent"
-
-                    />
-
-                <include
-                    android:id="@+id/shimmerRight3"
-                    layout="@layout/shimmer_characters"
-                    android:layout_width="@dimen/dp0"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/dp6"
-                    android:layout_marginEnd="@dimen/dp6"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/shimmerLeft3" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </com.facebook.shimmer.ShimmerFrameLayout>

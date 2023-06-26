@@ -5,5 +5,5 @@ import com.example.rickandmortytest.data.remote.remoteDataSource
 import org.koin.core.module.Module
 
 val koinModules: List<Module> = listOf(
-    repoModules, viewModules, useCaseModules, networkModules, remoteDataSource
+    repoModules, viewModules, useCaseModules, networkModules, remoteDataSource, pagingModules
 )

@@ -84,7 +84,6 @@ class EpisodeFragment : BaseFragment(R.layout.fragment_episode) {
     }
 
     private fun setupRecyclerView() {
-
         with(binding) {
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
             recyclerView.adapter = episodesAdapter.withLoadStateFooter(loadStateAdapter)
@@ -95,6 +94,5 @@ class EpisodeFragment : BaseFragment(R.layout.fragment_episode) {
     private fun onClick(id: Int) {
         findNavController().navigate(R.id.episodeDetailFragment, bundleOf("keyEpisode" to id))
     }
-
 
 }

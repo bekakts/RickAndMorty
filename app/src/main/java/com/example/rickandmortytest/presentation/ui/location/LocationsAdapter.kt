@@ -6,11 +6,13 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rickandmortytest.data.model.LocationEntity
+import com.example.rickandmortytest.data.model.LocationsEntity
 import com.example.rickandmortytest.databinding.ItemLocationsBinding
 import com.example.rickandmortytest.domain.model.Location
 
 class LocationsAdapter(val onClick: (id: Int) -> Unit) :
-    PagingDataAdapter<Location, LocationsAdapter.LocationViewHolder>(NoteDiffUtil()) {
+    PagingDataAdapter<Location, LocationsAdapter.LocationViewHolder>(LocationsDiffUtil()) {
 
 
     override fun onBindViewHolder(holder: LocationViewHolder, position: Int) {
@@ -43,7 +45,7 @@ class LocationsAdapter(val onClick: (id: Int) -> Unit) :
         }
     }
 
-    private class NoteDiffUtil : DiffUtil.ItemCallback<Location>() {
+    private class LocationsDiffUtil : DiffUtil.ItemCallback<Location>() {
         override fun areItemsTheSame(oldItem: Location, newItem: Location) =
             oldItem.id == newItem.id
 

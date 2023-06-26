@@ -6,11 +6,12 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.rickandmortytest.data.model.CharacterEntity
 import com.example.rickandmortytest.databinding.CharacterLayoutBinding
 import com.example.rickandmortytest.domain.model.Character
 
 class CharacterAdapter(val onClick: (id: Int) -> Unit) :
-    PagingDataAdapter<Character, CharacterAdapter.ImageViewHolder>(NoteDiffUtil()) {
+    PagingDataAdapter<Character, CharacterAdapter.ImageViewHolder>(CharactersDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         return ImageViewHolder(
@@ -41,7 +42,7 @@ class CharacterAdapter(val onClick: (id: Int) -> Unit) :
         }
     }
 
-    private class NoteDiffUtil : DiffUtil.ItemCallback<Character>() {
+    private class CharactersDiffUtil : DiffUtil.ItemCallback<Character>() {
         override fun areItemsTheSame(oldItem: Character, newItem: Character) =
             oldItem.id == newItem.id
 

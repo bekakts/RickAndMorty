@@ -1,6 +1,7 @@
 package com.example.rickandmortytest.presentation.ui.episode
 
 import androidx.paging.PagingData
+import com.example.rickandmortytest.data.model.EpisodeEntity
 import com.example.rickandmortytest.domain.model.Episode
 import com.example.rickandmortytest.domain.usecases.episode.GetEpisodes
 import com.example.rickandmortytest.presentation.base.BaseViewModel

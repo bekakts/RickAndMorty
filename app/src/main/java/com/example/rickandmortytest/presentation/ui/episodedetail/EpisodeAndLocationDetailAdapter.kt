@@ -10,7 +10,7 @@ import com.example.rickandmortytest.databinding.ItemEpisodeCharacterBinding
 import com.example.rickandmortytest.domain.model.Character
 
 class EpisodeAndLocationDetailAdapter(val onClick: (id: Int) -> Unit) :
-    ListAdapter<Character, EpisodeAndLocationDetailAdapter.EpisodeDetailViewHolder>(NoteDiffUtil()) {
+    ListAdapter<Character, EpisodeAndLocationDetailAdapter.EpisodeDetailViewHolder>(EpisodeAndLocationDetailDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EpisodeDetailViewHolder {
         return EpisodeDetailViewHolder(
@@ -41,7 +41,7 @@ class EpisodeAndLocationDetailAdapter(val onClick: (id: Int) -> Unit) :
         }
     }
 
-    private class NoteDiffUtil : DiffUtil.ItemCallback<Character>() {
+    private class EpisodeAndLocationDetailDiffUtil : DiffUtil.ItemCallback<Character>() {
         override fun areItemsTheSame(oldItem: Character, newItem: Character) =
             oldItem.id == newItem.id
 

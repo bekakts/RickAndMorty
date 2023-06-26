@@ -1,5 +1,6 @@
 package com.example.rickandmortytest.data.remote
 
+import com.example.rickandmortytest.data.base.BaseMainResponse
 import com.example.rickandmortytest.data.model.*
 import retrofit2.Response
 import retrofit2.http.GET
@@ -15,7 +16,7 @@ interface Api {
         @Query("status") status: String? = null,
         @Query("species") species: String? = null,
         @Query("gender") gender: String? = null
-    ): Response<CharactersEntity>
+    ): BaseMainResponse<CharacterEntity>
 
     @GET("character/{id}")
     suspend fun getCharacterByID(
@@ -26,7 +27,7 @@ interface Api {
     suspend fun getLocations(
         @Query("page") page: Int,
         @Query("name") name: String? = null
-    ): Response<LocationsEntity>
+    ): BaseMainResponse<LocationEntity>
 
     @GET("location/{id}")
     suspend fun getLocationByID(
@@ -37,7 +38,7 @@ interface Api {
     suspend fun getEpisodes(
         @Query("page") page: Int,
         @Query("name") name: String? = null
-    ): Response<EpisodesEntity>
+    ): BaseMainResponse<EpisodeEntity>
 
     @GET("episode/{id}")
     suspend fun getEpisodeByID(

@@ -7,11 +7,12 @@ import com.example.rickandmortytest.presentation.base.BaseViewModel
 import com.example.rickandmortytest.presentation.utils.UIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import com.example.rickandmortytest.domain.model.Character
 
 class CharactersViewModel(private val getCharacterUseCase: GetCharacters) : BaseViewModel() {
 
     private val _getCharacterState =
-        MutableStateFlow<UIState<PagingData<com.example.rickandmortytest.domain.model.Character>>>(
+        MutableStateFlow<UIState<PagingData<Character>>>(
             UIState.Empty()
         )
     val getCharacterState = _getCharacterState.asStateFlow()

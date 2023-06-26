@@ -3,6 +3,7 @@ package com.example.rickandmortytest.presentation.ui.characters
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.widget.Button
 import android.widget.RadioButton
 import android.widget.RadioGroup
@@ -12,6 +13,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.map
 import androidx.recyclerview.widget.GridLayoutManager
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.example.rickandmortytest.R
@@ -63,6 +65,7 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
             state = null,
             onSuccess = {
                 characterAdapter.submitData(lifecycle, it)
+                Log.e("ololo","CF.sS:$it")
                 binding.recyclerView.scrollToPosition(0)
             }
         )

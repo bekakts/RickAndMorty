@@ -1,9 +1,9 @@
 package com.example.rickandmortytest.domain.usecases.character
 
-import com.example.rickandmortytest.domain.repository.Repository
+import com.example.rickandmortytest.domain.paging.PagingSource
 
-class GetCharacters(private val repository: Repository) {
+class GetCharacters(private val pagingSource: PagingSource) {
     operator fun invoke(name: String?, status: String?, species: String?, gender: String?) =
-        repository.getCharacters(name, status, species, gender)
+        pagingSource.getCharacters(name, status, species, gender)
 
 }

@@ -18,7 +18,6 @@ class RemoteDataSource(private val api: Api) : BaseDataSource() {
         return getResult { api.getCharacterByID(id) }
     }
 
-
     suspend fun getLocation(id: Int): Resource<LocationEntity> {
         return getResult { api.getLocationByID(id) }
     }

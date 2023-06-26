@@ -5,11 +5,12 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.rickandmortytest.data.model.EpisodeEntity
 import com.example.rickandmortytest.databinding.ItemEpisodeBinding
 import com.example.rickandmortytest.domain.model.Episode
 
 class EpisodesAdapter(val onClick: (id: Int) -> Unit) :
-    PagingDataAdapter<Episode, EpisodesAdapter.EpisodesViewHolder>(NoteDiffUtil()) {
+    PagingDataAdapter<Episode, EpisodesAdapter.EpisodesViewHolder>(EpisodesDiffUtil()) {
 
 
     override fun onBindViewHolder(holder: EpisodesViewHolder, position: Int) {
@@ -40,7 +41,7 @@ class EpisodesAdapter(val onClick: (id: Int) -> Unit) :
         }
     }
 
-    private class NoteDiffUtil : DiffUtil.ItemCallback<Episode>() {
+    private class EpisodesDiffUtil : DiffUtil.ItemCallback<Episode>() {
 
         override fun areItemsTheSame(oldItem: Episode, newItem: Episode) = oldItem.id == newItem.id
 
