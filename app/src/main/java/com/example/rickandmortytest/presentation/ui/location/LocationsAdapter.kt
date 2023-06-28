@@ -6,8 +6,6 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.rickandmortytest.data.model.LocationEntity
-import com.example.rickandmortytest.data.model.LocationsEntity
 import com.example.rickandmortytest.databinding.ItemLocationsBinding
 import com.example.rickandmortytest.domain.model.Location
 

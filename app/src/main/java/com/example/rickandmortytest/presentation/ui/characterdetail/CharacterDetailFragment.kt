@@ -25,46 +25,12 @@ class CharacterDetailFragment : BaseFragment(R.layout.fragment_character_detail)
     private val episodeAdapter = CharacterEpisodeAdapter(this::onClick)
     private lateinit var cld: ConnectionLiveData
 
-    override fun isConnection() {
-        super.isConnection()
-        cld = ConnectionLiveData(requireActivity().application)
-        if (activity != null && isAdded) {
-            cld.observe(viewLifecycleOwner) { answer ->
-                if (answer) {
-                    receiveId()
-                    viewModel.getCharacter(id)
-                }
-            }
-        }
-    }
-
     override fun initialize() {
         super.initialize()
+        receiveId()
+        cld = ConnectionLiveData(requireActivity().application)
+        checkConnection(cld) { viewModel.getCharacter(id) }
         setUpRecyclerView()
-    }
-
-    override fun initClickListeners() {
-        super.initClickListeners()
-        with(binding) {
-            tvGreenLocation.setOnClickListener {
-                if (idLocation != null) {
-                    findNavController().navigate(
-                        R.id.locationDetailFragment,
-                        bundleOf("keyLocation" to idLocation)
-                    )
-                }
-            }
-            btnBack.setOnClickListener {
-                findNavController().navigateUp()
-            }
-        }
-    }
-
-    private fun setUpRecyclerView() {
-        with(binding) {
-            recyclerEpisode.layoutManager = LinearLayoutManager(requireContext())
-            recyclerEpisode.adapter = episodeAdapter
-        }
     }
 
     override fun setupSubscribers() {
@@ -102,6 +68,30 @@ class CharacterDetailFragment : BaseFragment(R.layout.fragment_character_detail)
                 episodeAdapter.submitList(it)
             }
         )
+    }
+
+    override fun initClickListeners() {
+        super.initClickListeners()
+        with(binding) {
+            tvGreenLocation.setOnClickListener {
+                if (idLocation != null) {
+                    findNavController().navigate(
+                        R.id.locationDetailFragment,
+                        bundleOf("keyLocation" to idLocation)
+                    )
+                }
+            }
+            btnBack.setOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
+    }
+
+    private fun setUpRecyclerView() {
+        with(binding) {
+            recyclerEpisode.layoutManager = LinearLayoutManager(requireContext())
+            recyclerEpisode.adapter = episodeAdapter
+        }
     }
 
     private fun onClick(id: Int) {

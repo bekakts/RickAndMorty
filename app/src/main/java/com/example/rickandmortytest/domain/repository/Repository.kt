@@ -1,8 +1,5 @@
 package com.example.rickandmortytest.domain.repository
 
-import androidx.paging.PagingData
-import com.example.rickandmortytest.data.model.LocationEntity
-import com.example.rickandmortytest.data.model.LocationsEntity
 import com.example.rickandmortytest.domain.model.Character
 import com.example.rickandmortytest.domain.model.Episode
 import com.example.rickandmortytest.domain.model.Location

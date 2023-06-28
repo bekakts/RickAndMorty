@@ -22,17 +22,13 @@ class EpisodeFragment : BaseFragment(R.layout.fragment_episode) {
     private val loadStateAdapter = LoadStatePagerAdapter()
     private lateinit var cld: ConnectionLiveData
 
-    override fun isConnection() {
-        super.isConnection()
+    override fun initialize() {
+        super.initialize()
         cld = ConnectionLiveData(requireActivity().application)
-        if (activity != null && isAdded) {
-            cld.observe(viewLifecycleOwner) { answer ->
-                if (answer) {
-                    viewModel.getEpisodes(name)
-                }
-            }
-        }
+        checkConnection(cld) { viewModel.getEpisodes(name) }
+        setupRecyclerView()
     }
+
 
     override fun setupSubscribers() {
         super.setupSubscribers()
@@ -54,34 +50,12 @@ class EpisodeFragment : BaseFragment(R.layout.fragment_episode) {
                     binding.shimmerViewContainer.isVisible = false
                 }
             }
+            searchCharacters.baseSearchLogic(
+                { viewModel.invalidate() },
+                { name -> viewModel.getEpisodes(name) })
         }
     }
 
-    override fun initialize() {
-        super.initialize()
-        setupRecyclerView()
-        searchLogic()
-    }
-
-    private fun searchLogic() {
-        with(binding) {
-            searchCharacters.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(p0: String?): Boolean {
-                    searchCharacters.clearFocus()
-                    return false
-                }
-
-                override fun onQueryTextChange(p0: String?): Boolean {
-                    p0?.let {
-                        name = it
-                        viewModel.invalidate()
-                        viewModel.getEpisodes(name)
-                    }
-                    return false
-                }
-            })
-        }
-    }
 
     private fun setupRecyclerView() {
         with(binding) {

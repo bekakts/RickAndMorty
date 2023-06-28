@@ -1,7 +1,6 @@
 package com.example.rickandmortytest.domain.model
 
 import java.io.Serializable
-
 data class Episode(
     val id: Int,
     val name: String? = null,

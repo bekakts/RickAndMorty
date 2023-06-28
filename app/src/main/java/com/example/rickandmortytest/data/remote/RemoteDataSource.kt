@@ -1,9 +1,7 @@
 package com.example.rickandmortytest.data.remote
 
 import com.example.rickandmortytest.data.base.BaseDataSource
-import com.example.rickandmortytest.data.model.CharacterEntity
-import com.example.rickandmortytest.data.model.EpisodeEntity
-import com.example.rickandmortytest.data.model.LocationEntity
+import com.example.rickandmortytest.data.model.*
 import com.example.rickandmortytest.domain.utils.Resource
 import org.koin.core.module.Module
 import org.koin.dsl.module

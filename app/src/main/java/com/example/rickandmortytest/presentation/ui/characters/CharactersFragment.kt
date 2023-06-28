@@ -42,21 +42,12 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
     private lateinit var cld: ConnectionLiveData
     private val loadStateAdapter = LoadStatePagerAdapter()
 
-    override fun isConnection() {
-        super.isConnection()
+    override fun initialize() {
+        super.initialize()
         cld = ConnectionLiveData(requireActivity().application)
-        if (activity != null && isAdded) {
-            cld.observe(viewLifecycleOwner) { answer ->
-                if (answer) {
-                    viewModel.getCharacter(name, statusID, speciesID, genderID)
-                }
-            }
-        }
-    }
-
-    override fun setupRequests() {
-        super.setupRequests()
-        viewModel.getCharacter(name, statusID, speciesID, genderID)
+        checkConnection(cld) { viewModel.getCharacter(name, statusID, speciesID, genderID) }
+        setupRecyclerView()
+        initObserve()
     }
 
     override fun setupSubscribers() {
@@ -65,18 +56,38 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
             state = null,
             onSuccess = {
                 characterAdapter.submitData(lifecycle, it)
-                Log.e("ololo","CF.sS:$it")
                 binding.recyclerView.scrollToPosition(0)
             }
         )
     }
 
-    override fun initialize() {
-        super.initialize()
-        setupRecyclerView()
-        searchLogic()
-        initObserve()
+    override fun initClickListeners() {
+        super.initClickListeners()
+        with(binding) {
+            tvFilter.setOnClickListener {
+                filterLogic()
+            }
+            recyclerView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
+                if ((binding.recyclerView.adapter?.itemCount ?: 0) > 0) {
+                    binding.shimmerViewContainer.isVisible = false
+                }
+            }
+            searchCharacters.baseSearchLogic(
+                {viewModel.invalidate()},
+                {name-> viewModel.getCharacter(name,statusID, speciesID, genderID)}
+            )
+        }
+    }
 
+    private fun setupRecyclerView() {
+        with(binding) {
+            recyclerView.adapter = characterAdapter.withLoadStateFooter(loadStateAdapter)
+            recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
+        }
+    }
+
+    private fun onClick(id: Int) {
+        findNavController().navigate(R.id.characterDetailFragment, bundleOf("key" to id))
     }
 
     private fun initObserve() {
@@ -92,20 +103,6 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
                     genderID = gender
                     getCharacter(name, status, species, gender)
                 }.collect()
-            }
-        }
-    }
-
-    override fun initClickListeners() {
-        super.initClickListeners()
-        with(binding) {
-            tvFilter.setOnClickListener {
-                filterLogic()
-            }
-            recyclerView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
-                if ((binding.recyclerView.adapter?.itemCount ?: 0) > 0) {
-                    binding.shimmerViewContainer.isVisible = false
-                }
             }
         }
     }
@@ -148,35 +145,4 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
             gender.clearCheck()
         }
     }
-
-    private fun searchLogic() {
-        with(binding) {
-            searchCharacters.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(p0: String?): Boolean {
-                    searchCharacters.clearFocus()
-                    return false
-                }
-
-                override fun onQueryTextChange(p0: String?): Boolean {
-                    p0?.let {
-                        name = it
-                        viewModel.getCharacter(name, statusID, speciesID, genderID)
-                    }
-                    return false
-                }
-            })
-        }
-    }
-
-    private fun setupRecyclerView() {
-        with(binding) {
-            recyclerView.adapter = characterAdapter.withLoadStateFooter(loadStateAdapter)
-            recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
-        }
-    }
-
-    private fun onClick(id: Int) {
-        findNavController().navigate(R.id.characterDetailFragment, bundleOf("key" to id))
-    }
-
 }

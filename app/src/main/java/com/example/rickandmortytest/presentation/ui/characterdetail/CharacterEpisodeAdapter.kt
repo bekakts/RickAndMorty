@@ -33,6 +33,7 @@ class CharacterEpisodeAdapter(val onClick: (id: Int) -> Unit) :
             with(binding) {
                 itemView.setOnClickListener {
                     onClick(episode.id)
+
                 }
                 tvName.text = episode.name
                 tvAirDate.text = episode.air_date

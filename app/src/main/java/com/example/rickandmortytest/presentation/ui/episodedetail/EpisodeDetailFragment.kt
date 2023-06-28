@@ -17,22 +17,17 @@ class EpisodeDetailFragment : BaseFragment(R.layout.fragment_episode_detail) {
 
     private val binding: FragmentEpisodeDetailBinding by viewBinding(FragmentEpisodeDetailBinding::bind)
     private val viewModel: EpisodeDetailViewModel by viewModel()
-    private val characterAdapter = EpisodeAndLocationDetailAdapter(this::onClick)
+    private val characterAdapter = EpisodeDetailAdapter(this::onClick)
     private var id = arrayListOf<Int>()
     private val idCharacter = arrayListOf<Int>()
     private lateinit var cld: ConnectionLiveData
 
-    override fun isConnection() {
-        super.isConnection()
+    override fun initialize() {
+        super.initialize()
         cld = ConnectionLiveData(requireActivity().application)
-        if (activity != null && isAdded) {
-            cld.observe(viewLifecycleOwner) { answer ->
-                if (answer) {
-                    recieveId()
-                    viewModel.getEpisode(id)
-                }
-            }
-        }
+        receiveId()
+        checkConnection(cld) { viewModel.getEpisode(id) }
+        setUpRecyclerView()
     }
 
     override fun setupSubscribers() {
@@ -68,18 +63,6 @@ class EpisodeDetailFragment : BaseFragment(R.layout.fragment_episode_detail) {
         }
     }
 
-    override fun initialize() {
-        super.initialize()
-        setUpRecyclerView()
-    }
-
-    private fun setUpRecyclerView() {
-        with(binding) {
-            recyclerEpisode.layoutManager = LinearLayoutManager(requireContext())
-            recyclerEpisode.adapter = characterAdapter
-        }
-    }
-
     override fun initClickListeners() {
         super.initClickListeners()
         with(binding) {
@@ -89,7 +72,14 @@ class EpisodeDetailFragment : BaseFragment(R.layout.fragment_episode_detail) {
         }
     }
 
-    private fun recieveId() {
+    private fun setUpRecyclerView() {
+        with(binding) {
+            recyclerEpisode.layoutManager = LinearLayoutManager(requireContext())
+            recyclerEpisode.adapter = characterAdapter
+        }
+    }
+
+    private fun receiveId() {
         arguments?.let {
             id.clear()
             id.add(it.getInt("keyEpisode"))

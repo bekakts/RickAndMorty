@@ -1,8 +1,7 @@
 package com.example.rickandmortytest.presentation.ui.location
 
 import androidx.paging.PagingData
-import com.example.rickandmortytest.data.model.LocationEntity
-import com.example.rickandmortytest.data.model.LocationsEntity
+
 import com.example.rickandmortytest.domain.model.Location
 import com.example.rickandmortytest.domain.usecases.location.GetLocations
 import com.example.rickandmortytest.presentation.base.BaseViewModel

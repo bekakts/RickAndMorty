@@ -23,16 +23,11 @@ class LocationFragment : BaseFragment(R.layout.fragment_location) {
     private val loadStateAdapter = LoadStatePagerAdapter()
     private lateinit var cld: ConnectionLiveData
 
-    override fun isConnection() {
-        super.isConnection()
+    override fun initialize() {
+        super.initialize()
         cld = ConnectionLiveData(requireActivity().application)
-        if (activity != null && isAdded) {
-            cld.observe(viewLifecycleOwner) { answer ->
-                if (answer) {
-                    viewModel.getLocations(name)
-                }
-            }
-        }
+        checkConnection(cld) { viewModel.getLocations(name) }
+        setUpRecyclerView()
     }
 
     override fun setupSubscribers() {
@@ -55,32 +50,10 @@ class LocationFragment : BaseFragment(R.layout.fragment_location) {
                     shimmerViewContainer.isVisible = false
                 }
             }
-        }
-    }
-
-    override fun initialize() {
-        super.initialize()
-        setUpRecyclerView()
-        searchLogic()
-    }
-
-    private fun searchLogic() {
-        with(binding) {
-            searchCharacters.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-                override fun onQueryTextSubmit(p0: String?): Boolean {
-                    searchCharacters.clearFocus()
-                    return false
-                }
-
-                override fun onQueryTextChange(p0: String?): Boolean {
-                    p0?.let {
-                        name = it
-                        viewModel.invalidate()
-                        viewModel.getLocations(name)
-                    }
-                    return false
-                }
-            })
+            searchCharacters.baseSearchLogic(
+                {viewModel.invalidate()},
+                {name->viewModel.getLocations(name)}
+            )
         }
     }
 
