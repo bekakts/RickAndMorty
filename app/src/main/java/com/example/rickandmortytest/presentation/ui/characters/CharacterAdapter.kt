@@ -28,7 +28,6 @@ class CharacterAdapter(val onClick: (id: Int) -> Unit) :
 
     }
 
-
     inner class ImageViewHolder(private val binding: CharacterLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: Character?) {

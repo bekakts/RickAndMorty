@@ -73,8 +73,8 @@ class CharactersFragment : BaseFragment(R.layout.fragment_characters) {
                 }
             }
             searchCharacters.baseSearchLogic(
-                {viewModel.invalidate()},
-                {name-> viewModel.getCharacter(name,statusID, speciesID, genderID)}
+                { viewModel.invalidate() },
+                { name -> viewModel.getCharacter(name, statusID, speciesID, genderID) }
             )
         }
     }

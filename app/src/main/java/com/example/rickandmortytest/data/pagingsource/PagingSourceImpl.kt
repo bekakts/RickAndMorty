@@ -12,6 +12,7 @@ import com.example.rickandmortytest.domain.model.Episode
 import com.example.rickandmortytest.domain.model.Location
 import com.example.rickandmortytest.domain.paging.PagingSource
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
 
 class PagingSourceImpl(private val api: Api) :
     PagingSource, BasePagingRepositoryImpl() {
